@@ -3,13 +3,7 @@
 {% block content %}
 {% load static %}
 <center>
-    <div style="display: flex; justify-content: space-evenly;">
-        <a href="{% url 'E_Tonner' %}" class="btn">Recargando</a>
-        <a href="{% url 'O_Tonner' %}" class="btn">Ocupado</a>
-        <a href="{% url 'L_Tonner' %}" class="btn">Libre</a>
-        <a href="{% url 'R_Tonner' %}" class="btn">➕</a>
-
-    </div>
+    {% include 'layouts/Barra_Tonners.html' %}
     <br>
     <h1>Tonners Libre</h1>
     <br>
