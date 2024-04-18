@@ -1,0 +1,125 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+{% load static %}
+<center>
+    <div style="display: flex; justify-content: space-evenly;">
+        <a href="{% url 'E_Tonner' %}" class="btn">Recargando</a>
+        <a href="{% url 'O_Tonner' %}" class="btn">Ocupado</a>
+        <a href="{% url 'L_Tonner' %}" class="btn">Libre</a>
+        <a href="{% url 'R_Tonner' %}" class="btn">➕</a>
+
+    </div>
+    <br>
+    <h1>Tonners Ocupados</h1>
+    <br>
+    <hr>
+
+</center>
+
+<br>
+<br>
+
+<main class="container">
+    {% for producto in OCtonner %}
+        <div class="card shadow">
+            <center>
+                {% if producto.imagen %}
+                    <img src="{{ producto.imagen.url }}" style="width: 90px;">
+                {% else %}
+                    <img src="{% static 'images/SinImagen.png' %}" alt="LogoImagen" width="90px">
+                {% endif %}
+                
+                <p><span class="span">Tonner:</span> {{ producto.nombre }}</p>
+                <p>cantidad: {{ producto.cantidad }}</p>
+                <div>
+                    <a href="{% url 'ED_Tonner' producto.id %}" class="btn3">Editar</a>
+
+                    <a href="{% url 'retiroTonner' producto.id %}" class="btn">Pedir</a>
+                    
+                </div>
+
+            </center>
+        </div>
+        <br>
+    {% endfor %}
+    <style>
+        .btn{
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #21a4d8; 
+            color: #fff;
+            border-radius: 5px;
+        }
+        .btn:hover{
+            background-color: #0056b3;
+        }
+        .btn2{
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #d82121; 
+            color: #fff;
+            border-radius: 5px;
+        }
+        .btn2:hover{
+            background-color: #571313;
+        }
+        .btn3{
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #198a1e; 
+            color: #fff;
+            border-radius: 5px;
+        }
+        .btn3:hover{
+            background-color: #62d446;
+        }
+        .ver{
+            display: inline-block;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #21a4d8; 
+            color: #fff;
+            border-radius: 5px;
+        }
+        .ver:hover{
+            background-color: #0056b3;
+        }
+    
+        .pre{
+            color: red;
+        }
+        .span{
+            color: blueviolet;
+        }
+        .container{
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+        
+        .card{
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            width: 250px; 
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        }
+        input{
+            height: 50px;
+            width: 300px;
+        }
+    </style>
+{% endblock %}

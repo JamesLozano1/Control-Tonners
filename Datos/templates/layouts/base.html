@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <nav class="navbar">
+        <ul style="display: flex; justify-content: space-evenly;">
+            <li class="{% if request.path == '/R_Area/' %}active{% endif %}">
+                <a href="{% url 'R_Area' %}">Add Area</a>
+            </li>
+            <li class="{% if request.path == '/R_Persona/' %}active{% endif %}">
+                <a href="{% url 'R_Persona' %}">Add Persona</a>
+            </li>
+            <li class="{% if request.path == '/Tonners/' %}active{% endif %}">
+                <a href="{% url 'Tonners' %}">Tonners</a>
+            </li>
+            
+        </ul>
+    </nav>    
+    <div style="padding: 2rem;">
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    <style>
+       
+        footer {
+            background-color: #198a1e;
+            color: #ffffff;
+            text-align: center;
+            padding: 2px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .cart {
+            color: aliceblue;
+        }
+
+        .navbar {
+            background-color: #198a1e;
+            box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 20px 24px;
+            text-decoration: none;
+        }
+        .navbar .a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 20px 24px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        } 
+
+        .navbar .a:hover {
+            background-color: #ddd;
+            color: black;
+        } 
+
+        .navbar .active {
+            background-color: rgb(94, 226, 76); /* Color para Proteccion */
+        }
+
+        .navbar .active.green {
+            background-color: lightgreen; /* Color para Almacen */
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: white;
+  background-color: #171717;
+  padding: 1em 2em;
+  border: none;
+  border-radius: .6rem;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+button span:not(:nth-child(6)) {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 30px;
+  width: 30px;
+  background-color: #0c66ed;
+  border-radius: 50%;
+  transition: .6s ease;
+}
+
+button span:nth-child(6) {
+  position: relative;
+}
+
+button span:nth-child(1) {
+  transform: translate(-3.3em, -4em);
+}
+
+button span:nth-child(2) {
+  transform: translate(-6em, 1.3em);
+}
+
+button span:nth-child(3) {
+  transform: translate(-.2em, 1.8em);
+}
+
+button span:nth-child(4) {
+  transform: translate(3.5em, 1.4em);
+}
+
+button span:nth-child(5) {
+  transform: translate(3.5em, -3.8em);
+}
+
+button:hover span:not(:nth-child(6)) {
+  transform: translate(-50%, -50%) scale(4);
+  transition: 1.5s ease;
+}
+  
+        
+    </style>
+</body>
+</html>
