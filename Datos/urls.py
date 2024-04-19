@@ -10,11 +10,11 @@ urlpatterns = [
     path('R_Tonner/', views.Tonner_U, name='R_Tonner'),
     path('Tonners/', views.Tonners, name='Tonners'),
     path('L_Tonner/', views.E_Libre, name='L_Tonner'),
-    path('O_Tonner/', views.E_Ocupado, name='O_Tonner'),
     path('E_Tonner/', views.E_Recarga, name='E_Tonner'),    
     path('retirar_Tonner/<int:producto_id>/', views.RetiroTonner, name='retiroTonner'),
 
     path('ED_Tonner/<int:producto_id>/', views.Editar_Tonner, name='ED_Tonner'),    
+    path('V_Toners_R/', views.V_Toners_R, name='V_Toners_R'),
 ]
 
 

@@ -10,10 +10,19 @@
 <br>
 <div class="product-edit">
 
-    <h1>Modificando Tonner</h1>
+    <h1>
+        <center>
+        Modificando Tonner
+        <br>
+        <br>
+            <img     src="{{ form.instance.imagen.url }}" style="width: 150px;">
+        </center>
+
+    </h1>
     
     <form method="post" class="edit-form">
-
+        
+        
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="submit-button">Guardar cambios</button>
@@ -30,6 +39,7 @@
         border: 1px solid #ccc; 
         border-radius: 5px; 
         background-color: #f9f9f9; 
+        justify-content: space-evenly;
     }
 
     .back-link {

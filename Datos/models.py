@@ -50,3 +50,37 @@ class Retiro_Tonner(models.Model):
 
     def __str__(self):
         return f"{self.r_persona} - {self.r_tonner}"
+
+
+class Tabla_T_Toners(models.Model):
+    MARCA_I = [
+        ('N','N/A'),
+        ('H','HP'),
+        ('S','SAMSUNG'),
+        ('K','KYOSERA'),
+        ('E','EPSON'),
+    ]
+
+    T_TONER = [
+        ('105A','105A'),
+        ('30A','30A'),
+        ('83A','83A'),
+        ('136A','136A'),
+        ('175A','175A'),
+        ('17A','17A'),
+        ('19A','19A'),
+        ('85A','85A'),
+        ('226A','226A'),
+        ('D1015','D1015'),
+        ('TINTA','TINTA'),
+        ('N/A','N/A'),
+    ]
+
+    oficina = models.CharField(max_length=50)
+    activo = models.CharField(max_length=30)
+    n_impresoras = models.PositiveIntegerField()
+    referencia = models.CharField(max_length=100)
+    marca = models.CharField(max_length=1, choices=MARCA_I, default='N')
+    t_toner = models.CharField(max_length=5, choices=T_TONER, default='N/A')
+    otro_toner = models.CharField(max_length=5, choices=T_TONER, default='N/A')
+    cantidad_t = models.PositiveBigIntegerField()

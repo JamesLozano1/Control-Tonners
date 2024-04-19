@@ -1,5 +1,5 @@
 from django import forms
-from .models import Area, Persona, Tonner, Retiro_Tonner
+from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners
 
 class FormArea(forms.ModelForm):
     class Meta:
@@ -20,3 +20,8 @@ class FormsRetiroTonner(forms.ModelForm):
     class Meta: 
         model = Retiro_Tonner
         fields = ['r_persona', 'cantidad_retirada']
+
+class FormsTabla_Toners(forms.ModelForm):
+    class Meta:
+        model = Tabla_T_Toners
+        fields = '__all__'

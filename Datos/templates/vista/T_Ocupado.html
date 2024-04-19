@@ -2,42 +2,45 @@
 
 {% block content %}
 {% load static %}
-<center>
     {% include 'layouts/Barra_Tonners.html' %}
-
-    <br>
-    <h1>Tonners Ocupados</h1>
-    <br>
-    <hr>
-
-</center>
-
 <br>
 <br>
 
-<main class="container">
-    {% for producto in OCtonner %}
-        <div class="card shadow">
-            <center>
-                {% if producto.imagen %}
-                    <img src="{{ producto.imagen.url }}" style="width: 90px;">
-                {% else %}
-                    <img src="{% static 'images/SinImagen.png' %}" alt="LogoImagen" width="90px">
-                {% endif %}
-                
-                <p><span class="span">Tonner:</span> {{ producto.nombre }}</p>
-                <p>cantidad: {{ producto.cantidad }}</p>
-                <div>
-                    <a href="{% url 'ED_Tonner' producto.id %}" class="btn3">Editar</a>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Tonners Retirados</title>
+</head>
+<body>
+    <h1>Listado de Tonners Retirados</h1>
+<br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Tonner</th>
+                <th>Persona</th>
+                <th>Cantidad Retirada</th>
+                <th>Fecha de Retiro</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in producto %}
+            <tr>
+                <td>{{ item.r_tonner }}</td>
+                <td>{{ item.r_persona }}</td>
+                <td>{{ item.cantidad_retirada }}</td>
+                <td>{{ item.fecha_retiro }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-                    <a href="{% url 'retiroTonner' producto.id %}" class="btn">Pedir</a>
-                    
-                </div>
+</body>
+</html>
 
-            </center>
-        </div>
-        <br>
-    {% endfor %}
     <style>
         .btn{
             display: inline-block;
@@ -78,43 +81,39 @@
         .btn3:hover{
             background-color: #62d446;
         }
-        .ver{
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h1 {
             text-align: center;
-            text-decoration: none;
-            background-color: #21a4d8; 
-            color: #fff;
-            border-radius: 5px;
+            color: #333;
         }
-        .ver:hover{
-            background-color: #0056b3;
-        }
-    
-        .pre{
-            color: red;
-        }
-        .span{
-            color: blueviolet;
-        }
-        .container{
+
+        table {
             width: 100%;
-            display: flex;
-            flex-wrap: wrap;
+            border-collapse: collapse;
+            margin-top: 20px;
         }
-        
-        .card{
-            border: 1px solid #ddd;
+
+        th, td {
             padding: 10px;
-            margin: 10px;
-            text-align: center;
-            width: 250px; 
-            box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+            text-align: center;;
+            border: 1px solid #ddd;
         }
-        input{
-            height: 50px;
-            width: 300px;
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
         }
     </style>
 {% endblock %}

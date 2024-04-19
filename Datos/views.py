@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Area, Persona, Tonner, Retiro_Tonner
-from .forms import FormArea, FormPersona, FormTonner, FormsRetiroTonner
+from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners
+from .forms import FormArea, FormPersona, FormTonner, FormsRetiroTonner,FormsTabla_Toners
 
 
 def Inicio(request):
@@ -120,3 +120,23 @@ def Editar_Tonner(request, producto_id):
     else:
         form = FormTonner(instance=producto)
     return render(request, 'vista/editar_tonner.html', {'form': form})
+
+def Tabla_D_Toners(request):
+
+    if request.method == 'POST':
+        form = FormTonner(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+
+    else:
+        form = FormTonner()
+    return render(request, 'registro/R_Tonner.html',{
+        'form': form,
+    })
+
+def V_Toners_R(request):
+    producto = Retiro_Tonner.objects.all()
+
+    return render(request, 'vista/T_Ocupado.html', {
+        'producto':producto,
+    })
