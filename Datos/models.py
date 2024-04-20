@@ -17,20 +17,20 @@ class Persona(models.Model):
 
 class Tonner(models.Model):
     ESTADO_T = [
-        ('R', 'Recargando'),
-        ('L', 'Libre'),
-        ('O', 'Ocupado'),
+        ('Recargando', 'Recargando'),
+        ('Disponible', 'Disponible'),
+        ('En Uso', 'En Uso'),
     ]
 
 
     nombre = models.CharField(max_length=50)
     cantidad = models.PositiveBigIntegerField()
     Numero_Tonner = models.CharField(max_length=20)
-    Estado = models.CharField(max_length=1, choices=ESTADO_T, default='L')
+    Estado = models.CharField(max_length=10, choices=ESTADO_T, default='L')
     imagen = models.ImageField()
     
     def __str__(self):
-        return f"{self.nombre} {self.Estado}"
+        return f"{self.nombre} - {self.Estado}"
 
     def is_recargando(self):
         return self.Estado == 'R'
@@ -54,11 +54,11 @@ class Retiro_Tonner(models.Model):
 
 class Tabla_T_Toners(models.Model):
     MARCA_I = [
-        ('N','N/A'),
-        ('H','HP'),
-        ('S','SAMSUNG'),
-        ('K','KYOSERA'),
-        ('E','EPSON'),
+        ('N/A','N/A'),
+        ('HP','HP'),
+        ('SAMSUNG','SAMSUNG'),
+        ('KYOSERA','KYOSERA'),
+        ('EPSON','EPSON'),
     ]
 
     T_TONER = [
@@ -80,7 +80,15 @@ class Tabla_T_Toners(models.Model):
     activo = models.CharField(max_length=30)
     n_impresoras = models.PositiveIntegerField()
     referencia = models.CharField(max_length=100)
-    marca = models.CharField(max_length=1, choices=MARCA_I, default='N')
+    marca = models.CharField(max_length=7, choices=MARCA_I, default='N/A')
     t_toner = models.CharField(max_length=5, choices=T_TONER, default='N/A')
     otro_toner = models.CharField(max_length=5, choices=T_TONER, default='N/A')
     cantidad_t = models.PositiveBigIntegerField()
+
+    def __str__(self) -> str:
+        return f"{self.oficina} {self.marca}"
+    
+
+class Generar_Reporte(models.Model):
+    nombre = models.CharField(max_length=20)
+    # toners = models.ForeignKey(Tonner.)

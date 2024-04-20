@@ -98,15 +98,15 @@ def RetiroTonner(request, producto_id):
 
 
 def E_Recarga(request):
-    r_tonner = Tonner.objects.filter(Estado='R')
+    r_tonner = Tonner.objects.filter(Estado='Recargando')
     return render(request, 'vista/T_Recargando.html', {'REtonner': r_tonner})
 
 def E_Ocupado(request):
-    r_tonner = Tonner.objects.filter(Estado='O')
+    r_tonner = Tonner.objects.filter(Estado='En Uso')
     return render(request, 'vista/T_Ocupado.html', {'OCtonner': r_tonner})
 
 def E_Libre(request):
-    r_tonner = Tonner.objects.filter(Estado='L')
+    r_tonner = Tonner.objects.filter(Estado='Disponible')
     return render(request, 'vista/T_Libre.html', {'LItonner': r_tonner})
 
 
@@ -139,4 +139,23 @@ def V_Toners_R(request):
 
     return render(request, 'vista/T_Ocupado.html', {
         'producto':producto,
+    })
+
+def Tabla_Impresoras_OFC(request):
+
+    if request.method == 'POST':
+        form = FormsTabla_Toners(request.POST)
+        if form.is_valid():
+            form.save()
+
+    else:
+        form = FormsTabla_Toners()
+    return render(request, 'Tablas/añadir_oficina.html',{
+        'form': form,
+    })
+
+def Ver_Tabla(request):
+    tabla = Tabla_T_Toners.objects.all()
+    return render(request, 'Tablas/tabla_OFP.html', {
+        'tabla':tabla,
     })

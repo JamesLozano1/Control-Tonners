@@ -15,6 +15,8 @@ urlpatterns = [
 
     path('ED_Tonner/<int:producto_id>/', views.Editar_Tonner, name='ED_Tonner'),    
     path('V_Toners_R/', views.V_Toners_R, name='V_Toners_R'),
+    path('Tabla_Impresoras_OFC/', views.Tabla_Impresoras_OFC, name='Tabla_Impresoras_OFC'),
+    path('Ver_Tabla/', views.Ver_Tabla, name='Ver_Tabla'),
 ]
 
 

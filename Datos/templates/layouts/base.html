@@ -12,7 +12,7 @@
                 <a href="{% url 'R_Area' %}">Usuario </a>
             </li>
             <li class="{% if request.path == '//' %}active{% elif request.path == '//'%} active {% endif %}">
-                <a href="">Municipios </a>
+                <a href="{% url 'Ver_Tabla' %}">Impresoras </a>
             </li>
             <li class="{% if request.path == '/L_Tonner/' %}active{% elif request.path == '/O_Tonner/'%} active {% elif request.path == '/E_Tonner/'%} active{% elif request.path == '/R_Tonner/'%} active{% endif %}">
                 <a href="{% url 'L_Tonner' %}">Tonners</a>
