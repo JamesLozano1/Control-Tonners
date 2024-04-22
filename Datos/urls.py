@@ -17,6 +17,8 @@ urlpatterns = [
     path('V_Toners_R/', views.V_Toners_R, name='V_Toners_R'),
     path('Tabla_Impresoras_OFC/', views.Tabla_Impresoras_OFC, name='Tabla_Impresoras_OFC'),
     path('Ver_Tabla/', views.Ver_Tabla, name='Ver_Tabla'),
+
+    path('toners-retirados/<int:producto_id>/', views.detalle_retiro_toner, name='detalle_retiro_toner'),
 ]
 
 

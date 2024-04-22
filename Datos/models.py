@@ -1,5 +1,5 @@
 from django.db import models
-
+## USUARIO ⬇ ---------------------------------------------------------------------------------------------
 class Area(models.Model):
     nombre = models.CharField(max_length=20)
 
@@ -14,7 +14,9 @@ class Persona(models.Model):
 
     def __str__( self ):
         return self.nombre
+## USUARIO ⬆ ---------------------------------------------------------------------------------------------
 
+## TONER ⬇ ---------------------------------------------------------------------------------------------
 class Tonner(models.Model):
     ESTADO_T = [
         ('Recargando', 'Recargando'),
@@ -30,7 +32,7 @@ class Tonner(models.Model):
     imagen = models.ImageField()
     
     def __str__(self):
-        return f"{self.nombre} - {self.Estado}"
+        return f"{self.nombre}"
 
     def is_recargando(self):
         return self.Estado == 'R'
@@ -48,9 +50,13 @@ class Retiro_Tonner(models.Model):
     cantidad_retirada = models.PositiveIntegerField()
     fecha_retiro = models.DateTimeField(auto_now_add=True)
 
+
     def __str__(self):
         return f"{self.r_persona} - {self.r_tonner}"
 
+## TONER ⬆ ---------------------------------------------------------------------------------------------
+
+## TABLA TONER OFICINA PRINCIPAL IBAGUE ⬇ ---------------------------------------------------------------------------------------------
 
 class Tabla_T_Toners(models.Model):
     MARCA_I = [
@@ -88,7 +94,5 @@ class Tabla_T_Toners(models.Model):
     def __str__(self) -> str:
         return f"{self.oficina} {self.marca}"
     
+## TABLA TONER OFICINA PRINCIPAL IBAGUE ⬆ ---------------------------------------------------------------------------------------------
 
-class Generar_Reporte(models.Model):
-    nombre = models.CharField(max_length=20)
-    # toners = models.ForeignKey(Tonner.)

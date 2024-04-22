@@ -20,9 +20,9 @@
         <div class="card shadow">
             <center>
                 {% if producto.imagen %}
-                    <img src="{{ producto.imagen.url }}" style="width: 90px;">
+                    <img src="{{ producto.imagen.url }}" style="width: 90px; height: 95px;">
                 {% else %}
-                    <img src="{% static 'images/SinImagen.png' %}" alt="LogoImagen" width="90px">
+                    <img src="{% static 'images/SinImagen.png' %}" alt="LogoImagen" style="width:90px;">
                 {% endif %}
                 
                 <p><span class="span">Tonner:</span> {{ producto.nombre }}</p>

@@ -159,3 +159,8 @@ def Ver_Tabla(request):
     return render(request, 'Tablas/tabla_OFP.html', {
         'tabla':tabla,
     })
+
+def detalle_retiro_toner(request, producto_id):
+    retiro_toner = get_object_or_404(Retiro_Tonner, pk=producto_id)
+
+    return render(request, 'vista/ver_T_EnUso.html', {'retiro_toner': retiro_toner})

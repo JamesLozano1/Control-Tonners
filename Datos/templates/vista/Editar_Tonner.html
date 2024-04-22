@@ -8,19 +8,19 @@
 <br>
 <br>
 <br>
-<div class="product-edit">
+<div class="product-edit" style="text-align: start; font-size: 28px;">
 
-    <h1>
+    <h1 style="padding-left: 5rem;">
         <center>
         Modificando Tonner
         <br>
         <br>
-            <img     src="{{ form.instance.imagen.url }}" style="width: 150px;">
+            <img src="{{ form.instance.imagen.url }}" style="width: 200px;">
         </center>
 
     </h1>
     
-    <form method="post" class="edit-form">
+    <form method="post" class="edit-form" style="margin: 1rem;">
         
         
         {% csrf_token %}
@@ -33,7 +33,7 @@
 <style>
     .product-edit {
         display: flex;
-        max-width: 600px; 
+        max-width: max-content; 
         margin: 0 auto; 
         padding: 20px; 
         border: 1px solid #ccc; 

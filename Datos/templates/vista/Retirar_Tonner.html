@@ -97,12 +97,22 @@
             max-width: 100%;
             max-height: 200px;
         }
+        .product-edit {
+        display: flex;
+        max-width: max-content; 
+        margin: 0 auto; 
+        padding: 20px; 
+        border: 1px solid #ccc; 
+        border-radius: 5px; 
+        background-color: #f9f9f9; 
+        justify-content: space-evenly;
+    }
     </style>
 </head>
 <body>
     <h1>Retirando Tonner</h1>
     
-    <form method="post">
+    <form method="post" class="" style="text-align: start; font-size: 28px;">
         <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="120px" style="border-radius: 10px;">
         <p>Nombre Producto: <span style="color: #0056b3;">{{ producto.nombre }}</span></p>
         <hr>
