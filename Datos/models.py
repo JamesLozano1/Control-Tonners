@@ -84,12 +84,12 @@ class Tabla_T_Toners(models.Model):
 
     oficina = models.CharField(max_length=50)
     activo = models.CharField(max_length=30)
-    n_impresoras = models.PositiveIntegerField()
+    numero_impresoras = models.PositiveIntegerField()
     referencia = models.CharField(max_length=100)
     marca = models.CharField(max_length=7, choices=MARCA_I, default='N/A')
-    t_toner = models.CharField(max_length=5, choices=T_TONER, default='N/A')
+    toner_de_impresora = models.CharField(max_length=5, choices=T_TONER, default='N/A')
     otro_toner = models.CharField(max_length=5, choices=T_TONER, default='N/A')
-    cantidad_t = models.PositiveBigIntegerField()
+    cantidad_toner = models.PositiveBigIntegerField()
 
     def __str__(self) -> str:
         return f"{self.oficina} {self.marca}"
