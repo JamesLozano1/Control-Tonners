@@ -8,12 +8,7 @@
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 <center>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -23,28 +18,61 @@
     </form>
 </center>
 <style>
-    form {
-        display: flex;
-        margin: 10px; 
-        padding: 20px; 
-        border: 1px solid #ccc; 
-        background-color: #f9f9f9; 
-        justify-content: space-evenly;
+   body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f8f8;
+            padding: 20px;
+        }
 
-    }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-    .btn {
-        background-color: #21a4d8; 
-        color: #fff; 
-        padding: 10px 20px; 
-        border: none; 
-        cursor: pointer; 
-        border-radius: 5px; 
-    }
+        h2 {
+            text-align: center;
+            color: #333333;
+        }
 
-    .btn:hover {
-        background-color: #0056b3; 
-    }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333333;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #cccccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            margin-top: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #ffffff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
 
 </style>
 
