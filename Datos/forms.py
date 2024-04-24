@@ -1,5 +1,7 @@
 from django import forms
 from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners
+import base64
+from django.core.files.base import ContentFile
 
 class FormArea(forms.ModelForm):
     class Meta:
@@ -7,9 +9,26 @@ class FormArea(forms.ModelForm):
         fields = '__all__'
 
 class FormPersona(forms.ModelForm):
+    firma_imagen = forms.CharField(widget=forms.HiddenInput(), required=False)
     class Meta:
         model = Persona
-        fields = '__all__'
+        fields = ['nombre', 'area', 'firma_imagen']
+
+    def save(self, commit=True):
+        persona = super().save(commit=False)
+        firma_imagen = self.cleaned_data.get('firma_imagen')
+
+        if firma_imagen:
+            format, imgstr = firma_imagen.split(';base64,')
+            ext = format.split('/')[-1]
+            # Guardar la imagen de la firma en el campo 'firma' del modelo Persona
+            persona.firma.save(f'firma_{persona.nombre}.{ext}', ContentFile(base64.b64decode(imgstr)), save=False)
+
+        if commit:
+            persona.save()
+
+        return persona
+    
 
 class FormTonner(forms.ModelForm):
     class Meta:

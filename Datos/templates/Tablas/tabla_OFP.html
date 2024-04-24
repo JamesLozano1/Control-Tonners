@@ -132,15 +132,32 @@
         </thead>
         <tbody>
             {% for item in tabla %}
-                <tr>
+            <tr>
+                {% if item.numero_impresoras == 0 %}
+                    <td style="color: red;">{{ item.oficina }}</td>
+                    <td style="color: red;">{{ item.activo }}</td>
+                    <td style="color: red;">{{ item.numero_impresoras }}</td>
+                    <td style="color: red;">{{ item.referencia }}</td>
+                    <td style="color: red;">{{ item.marca }}</td>
+                    <td style="color: red;">{{ item.toner_de_impresora }}</td>
+                    <td style="color: red;">{{ item.otro_toner }}</td>
+                    <td style="color: red;">{{ item.cantidad_toner }}</td>
+                {% else %}
                     <td>{{ item.oficina }}</td>
                     <td>{{ item.activo }}</td>
                     <td>{{ item.numero_impresoras }}</td>
                     <td>{{ item.referencia }}</td>
                     <td>{{ item.marca }}</td>
                     <td>{{ item.toner_de_impresora }}</td>
-                    <td>{{ item.otro_toner }}</td>
-                    <td>{{ item.cantidad_toner }}</td>
+                    {% if item.otro_toner == "N/A" %}
+                        <td style="color: red;">{{ item.otro_toner }}</td>
+                        <td style="color: red;">{{ item.cantidad_toner }}</td>
+                    {% else %}
+                        <td>{{ item.otro_toner }}</td>
+                        <td>{{ item.cantidad_toner }}</td>
+                    {% endif %}
+                {% endif %}
+                
                 </tr>
             {% empty %}
             <tr>

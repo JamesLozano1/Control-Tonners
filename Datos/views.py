@@ -2,7 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners
 from .forms import FormArea, FormPersona, FormTonner, FormsRetiroTonner,FormsTabla_Toners
-
+import base64
+from django.core.files.base import ContentFile
 
 def Inicio(request):
     title = 'BIENVENIDO'
@@ -25,15 +26,21 @@ def Area_U(request):
     })
 
 def Persona_U(request):
-
     if request.method == 'POST':
-        form = FormPersona(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-
+        form = FormPersona(request.POST, request.FILES)  # Inicializar el formulario con datos de la solicitud POST
+        if form.is_valid():  # Verificar si el formulario es válido
+            firma_data = request.POST.get('firma_imagen')  # Obtener los datos de la firma en base64
+            persona = form.save(commit=False)  # Guardar el formulario sin confirmar la instancia de Persona
+            if firma_data:
+                format, imgstr = firma_data.split(';base64,')  # Separar los datos base64
+                ext = format.split('/')[-1]  # Obtener la extensión del archivo
+                # Guardar la imagen de la firma en el campo 'firma' del modelo Persona
+                persona.firma.save(f'firma_{persona.nombre}.{ext}', ContentFile(base64.b64decode(imgstr)), save=False)
+                persona.save()  # Guardar la instancia completa de Persona con la firma
     else:
-        form = FormPersona()
-    return render(request, 'registro/R_Persona.html',{
+        form = FormPersona()  # Inicializar el formulario para una solicitud GET
+
+    return render(request, 'registro/R_Persona.html', {
         'form': form,
     })
 

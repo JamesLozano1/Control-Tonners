@@ -1,52 +1,133 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-{% include 'layouts/Barra_user.html'%}
-<title>Registro Usuario</title>
+{% include 'layouts/Barra_user.html' %}
+
+<title>Registro de Persona</title>
+
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<center>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <br>
-        <button type="submit" class="btn">Agregar</button>
-    </form>
-</center>
+<div class="container">
+  <h2 style="text-align: center;">Registro de Persona</h2>
+  <br>
+  
+
+  <form method="post" enctype="multipart/form-data" style="max-width: 600px; margin: 0 auto;">
+    {% csrf_token %}
+    {{ form.as_p }} 
+
+    <br>
+    <hr>
+    <br>
+
+    <div style="margin-bottom: 20px;">
+      <label for="firma" style="display: block; margin-bottom: 5px;">Firma:</label>
+      <canvas id="canvas" width="400" height="200" style="border: 1px solid #ccc;"></canvas>
+      <input type="hidden" id="firma_imagen" name="firma_imagen">
+    </div>
+
+    <button type="submit" class="btn btn-primary" style="width: 100%;">Guardar</button>
+  </form>
+</div>
+
 <style>
+    
+
+  #canvas {
+    border: 1px solid #ccc;
+    cursor: crosshair;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+
+  body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
     form {
-        display: flex;
-        margin: 10px; 
-        padding: 20px; 
-        border: 1px solid #ccc; 
-        background-color: #f9f9f9; 
-        justify-content: space-evenly;
-
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 80%;
+        margin: 0 auto;
     }
 
-    .btn {
-        background-color: #21a4d8; 
-        color: #fff; 
-        padding: 10px 20px; 
-        border: none; 
-        cursor: pointer; 
-        border-radius: 5px; 
+    label {
+        display: block;
+        margin-bottom: 8px;
+        color: #666;
     }
 
-    .btn:hover {
-        background-color: #0056b3; 
+    input[type="text"], input[type="email"], input[type="password"], select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 15px;
+        font-size: 16px;
     }
 
+    #canvas {
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+    }
+
+    button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
 </style>
 
+<script>
+  var canvas = document.getElementById('canvas');
+  var ctx = canvas.getContext('2d');
+  var isDrawing = false;
+
+  canvas.addEventListener('mousedown', startDrawing);
+  canvas.addEventListener('mousemove', draw);
+  canvas.addEventListener('mouseup', stopDrawing);
+
+  function startDrawing(e) {
+    isDrawing = true;
+    ctx.beginPath();
+    ctx.moveTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+  }
+
+  function draw(e) {
+    if (isDrawing) {
+      ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+      ctx.stroke();
+    }
+  }
+
+  function stopDrawing() {
+    isDrawing = false;
+    var imageData = canvas.toDataURL();
+    document.getElementById('firma_imagen').value = imageData;
+  }
+
+
+</script>
+
 {% endblock %}
+

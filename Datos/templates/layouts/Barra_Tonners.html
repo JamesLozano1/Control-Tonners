@@ -2,10 +2,12 @@
     <a href="{% url 'E_Tonner' %}" class="btn">Recargando</a>
     <a href="{% url 'V_Toners_R' %}" class="btn">En uso</a>
     <a href="{% url 'L_Tonner' %}" class="btn">Disponible</a>
-    <a class="Btn" href="{% url 'R_Tonner' %}" style="margin-top: 1rem;">
-        <div class="sign">+</div>
-        <div class="text">Crear</div>
-    </a>
+    {% if request.path == '/L_Tonner/' %}
+        <a class="Btn" href="{% url 'R_Tonner' %}" style="margin-top: 1rem;">
+            <div class="sign">+</div>
+            <div class="text">Crear</div>
+        </a>
+    {% endif %}
 
 </div>
 
