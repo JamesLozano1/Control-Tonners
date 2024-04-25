@@ -1,4 +1,5 @@
-from django.db import models
+from django.db import models, transaction
+
 ## USUARIO ⬇ ---------------------------------------------------------------------------------------------
 class Area(models.Model):
     nombre = models.CharField(max_length=20)
@@ -57,9 +58,8 @@ class Retiro_Tonner(models.Model):
 ## TONER ⬆ ---------------------------------------------------------------------------------------------
 
 ## RECARGA DE TONER ⬇ ------------------------------------------------------------------------------------
-class Toner_Recarga(models.Model):
 
-    pass
+
 ## RECARGA DE TONER ⬆ ------------------------------------------------------------------------------------
 
 
@@ -102,4 +102,54 @@ class Tabla_T_Toners(models.Model):
         return f"{self.oficina} {self.marca}"
     
 ## TABLA TONER OFICINA PRINCIPAL IBAGUE ⬆ ---------------------------------------------------------------------------------------------
+
+
+## TABLA TONER MUNICIPIOS ⬇ ---------------------------------------------------------------------------------------------
+
+class Tabla_T_Toners_Municipios(models.Model):
+    MARCA_I = [
+        ('N/A','N/A'),
+        ('HP','HP'),
+        ('SAMSUNG','SAMSUNG'),
+        ('KYOSERA','KYOSERA'),
+        ('EPSON','EPSON'),
+    ]
+
+    T_TONER = [
+        ('105A','105A'),
+        ('30A','30A'),
+        ('83A','83A'),
+        ('136A','136A'),
+        ('175A','175A'),
+        ('17A','17A'),
+        ('19A','19A'),
+        ('85A','85A'),
+        ('226A','226A'),
+        ('D1015','D1015'),
+        ('MLT-D1018','MLT-D1018'),
+        ('101S','101S'),
+        ('TINTA','TINTA'),
+        ('N/A','N/A'),
+    ]
+
+    Y_N = [
+        ('SI','SI'),
+        ('NO','NO'),
+        ('REGISTRAR','REGISTRAR'),
+    ]
+
+    oficina = models.CharField(max_length=50)
+    activo = models.CharField(max_length=30)
+    numero_impresoras = models.PositiveIntegerField()
+    referencia = models.CharField(max_length=100)
+    marca = models.CharField(max_length=7, choices=MARCA_I, default='N/A')
+    toner_de_impresora = models.CharField(max_length=9, choices=T_TONER, default='N/A')
+    otro_toner = models.CharField(max_length=9, choices=T_TONER, default='N/A')
+    cantidad_toner = models.PositiveBigIntegerField()
+    comprobado = models.CharField(max_length=9, choices=Y_N, default='SI')
+
+    def __str__(self) -> str:
+        return f"{self.oficina} - {self.marca}"
+
+## TABLA TONER MUNICIPIOS ⬆ ---------------------------------------------------------------------------------------------
 

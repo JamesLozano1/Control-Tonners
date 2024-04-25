@@ -7,8 +7,210 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impresoras Municipios</title>
+    <style>
+        a{
+            text-decoration: none;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: center; 
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .no-data {
+            text-align: center;
+            font-style: italic;
+            color: #999;
+        }
+        .Btn {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 0px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition-duration: .3s;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+            background-color: black;
+        }
+
+        .sign {
+            width: min-content;
+            font-size: 2em;
+            color: white;
+            transition-duration: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+        .text {
+            position: absolute;
+            right: 0%;
+            width: 0%;
+            opacity: 0;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 500;
+            transition-duration: .3s;
+        }
+        .Btn:hover {
+            width: 125px;
+            border-radius: 0px;
+            transition-duration: .3s;
+        }
+
+        .Btn:hover .sign {
+            transition-duration: .3s;
+        }
+        .Btn:hover .text {
+            opacity: 1;
+            width: 70%;
+            transition-duration: .3s;
+        }
+
+        .Btn:active {
+        transform: translate(2px ,2px);
+        }
+
+        .navbar {
+            background-color: #fbe82c;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #124d71;
+            text-align: center;
+            padding: 20px 30px;
+            text-decoration: none;
+        }
+        .navbar .a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 20px 24px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #045cab;
+            color: white;
+        } 
+
+
+        .navbar .active a {
+            color: white;
+            background-color: #045cab; 
+            width: max-content;
+        }
+
+        .navbar .active.green {
+            color: white;
+            background-color: #045cab; ; 
+        }
+
+        ul {
+            list-style: none;
+        }
+
+    </style>
 </head>
 <body>
+    {% include 'layouts/Nav_Tablas.html' %}
+    <h1>TABLA DE IMPRESORAS MUNICIPIOS</h1>
+
+    <a class="Btn" href="{% url 'Tabla_D_Toners_Municipios' %}">
+        <div class="sign">+</div>
+        <div class="text">Crear</div>
+    </a>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>OFICINA</th>
+                <th>ACTIVO</th>
+                <th>NUMERO DE IMPRESORAS</th>
+                <th>REFERENCIA</th>
+                <th>MARCA</th>
+                <th>TONER</th>
+                <th>OTRO TONER</th>
+                <th>CANTIDAD OTROS</th>
+                <th>COMPROBADO</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in producto %}
+            <tr>
+                {% if item.numero_impresoras == 0 %}
+                    <td style="color: red;">{{ item.oficina }}</td>
+                    <td style="color: red;">{{ item.activo }}</td>
+                    <td style="color: red;">{{ item.numero_impresoras }}</td>
+                    <td style="color: red;">{{ item.referencia }}</td>
+                    <td style="color: red;">{{ item.marca }}</td>
+                    <td style="color: red;">{{ item.toner_de_impresora }}</td>
+                    <td style="color: red;">{{ item.otro_toner }}</td>
+                    <td style="color: red;">{{ item.cantidad_toner }}</td>
+                    <td style="color: red;">{{ item.comprobado }}</td>
+                {% else %}
+                    <td>{{ item.oficina }}</td>
+                    <td>{{ item.activo }}</td>
+                    <td>{{ item.numero_impresoras }}</td>
+                    <td>{{ item.referencia }}</td>
+                    <td>{{ item.marca }}</td>
+                    <td>{{ item.toner_de_impresora }}</td>
+                    {% if item.otro_toner == "N/A"%}
+                        <td style="color: red;">{{ item.otro_toner }}</td>
+                        <td style="color: red;">{{ item.cantidad_toner }}</td>
+                        {% if item.comprobado == "NO" or item.comprobado == "REGISTRAR"  %}
+                            <td style="color: red;">{{ item.comprobado }}</td>
+                        {% else %}
+                            <td>{{ item.comprobado }}</td>
+                        {% endif %}
+                    {% else %}
+                        <td>{{ item.otro_toner }}</td>
+                        <td>{{ item.cantidad_toner }}</td>
+                        <td>{{ item.comprobado }}</td>
+                    {% endif %}
+                {% endif %}
+                
+                </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8">No hay datos disponibles.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     
 </body>
 </html>

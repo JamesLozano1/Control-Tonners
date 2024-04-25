@@ -2,260 +2,260 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retirar Tonner</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retirar Tonner</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-        h1 {
-            color: #21a4d8;
-        }
+    h1 {
+      color: #21a4d8;
+    }
 
-        form {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            margin: 20px;
-            width: 300px;
-            max-width: 100%;
-        }
+    form {
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin: 20px;
+      width: 300px;
+      max-width: 100%;
+    }
 
-        label {
-            display: block;
-            margin-bottom: 8px;
-        }
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
 
-        input[type="text"], input[type="number"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 16px;
-            box-sizing: border-box;
-        }
+    input[type="text"],
+    input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
 
-        input[type="submit"] {
-            background-color: #198a1e;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
+    input[type="submit"] {
+      background-color: #198a1e;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-        input[type="submit"]:hover {
-            background-color: #155917;
-        }
+    input[type="submit"]:hover {
+      background-color: #155917;
+    }
 
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
-            text-align: center;
-            text-decoration: none;
-            background-color: #21a4d8; 
-            color: #fff;
-            border-radius: 5px;
-        }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 20px;
+      text-align: center;
+      text-decoration: none;
+      background-color: #21a4d8;
+      color: #fff;
+      border-radius: 5px;
+    }
 
-        .btn:hover {
-            background-color: #0056b3;
-        }
+    .btn:hover {
+      background-color: #0056b3;
+    }
 
-        .btn2 {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
-            text-align: center;
-            text-decoration: none;
-            background-color: #d82d21; 
-            color: #fff;
-            border-radius: 5px;
-        }
+    .btn2 {
+      display: inline-block;
+      padding: 10px 20px;
+      margin-top: 20px;
+      text-align: center;
+      text-decoration: none;
+      background-color: #d82d21;
+      color: #fff;
+      border-radius: 5px;
+    }
 
-        .btn2:hover {
-            background-color: #86392f;
-        }
+    .btn2:hover {
+      background-color: #86392f;
+    }
 
-        .product-info {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    .product-info {
+      text-align: center;
+      margin-bottom: 20px;
+    }
 
-        .product-info img {
-            max-width: 100%;
-            max-height: 200px;
-        }
-        .product-edit {
-        display: flex;
-        max-width: max-content; 
-        margin: 0 auto; 
-        padding: 20px; 
-        border: 1px solid #ccc; 
-        border-radius: 5px; 
-        background-color: #f9f9f9; 
-        justify-content: space-evenly;
+    .product-info img {
+      max-width: 100%;
+      max-height: 200px;
+    }
+
+    .product-edit {
+      display: flex;
+      max-width: max-content;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      justify-content: space-evenly;
     }
 
     button {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-  font-size: 17px;
-  padding: 1em 2.7em;
-  font-weight: 500;
-  background: #1f2937;
-  color: white;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.6em;
-  cursor: pointer;
-}
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 17px;
+      padding: 1em 2.7em;
+      font-weight: 500;
+      background: #1f2937;
+      color: white;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.6em;
+      cursor: pointer;
+    }
 
-.gradient {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  border-radius: 0.6em;
-  margin-top: -0.25em;
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.3)
-  );
-}
+    .gradient {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      border-radius: 0.6em;
+      margin-top: -0.25em;
+      background-image: linear-gradient(rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0.3));
+    }
 
-.label {
-  position: relative;
-  top: -1px;
-}
+    .label {
+      position: relative;
+      top: -1px;
+    }
 
-.transition {
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  transition-duration: 500ms;
-  background-color: rgba(230, 21, 21, 0.6);
-  border-radius: 9999px;
-  width: 0;
-  height: 0;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+    .transition {
+      transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      transition-duration: 500ms;
+      background-color: rgba(230, 21, 21, 0.6);
+      border-radius: 9999px;
+      width: 0;
+      height: 0;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-button:hover .transition {
-  width: 14em;
-  height: 14em;
-}
+    button:hover .transition {
+      width: 14em;
+      height: 14em;
+    }
 
-button:active {
-  transform: scale(0.97);
-}
+    button:active {
+      transform: scale(0.97);
+    }
 
-/*boton volver*/
+    /*boton volver*/
     .button2 {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-  font-size: 17px;
-  padding: 1em 2.7em;
-  font-weight: 500;
-  background: #1f2937;
-  color: white;
-  border: none;
-  position: relative;
-  overflow: hidden;
-  border-radius: 0.6em;
-  cursor: pointer;
-}
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 17px;
+      padding: 1em 2.7em;
+      font-weight: 500;
+      background: #1f2937;
+      color: white;
+      border: none;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0.6em;
+      cursor: pointer;
+    }
 
-.gradient2 {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  border-radius: 0.6em;
-  margin-top: -0.25em;
-  background-image: linear-gradient(
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0),
-    rgba(0, 0, 0, 0.3)
-  );
-}
+    .gradient2 {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      top: 0;
+      border-radius: 0.6em;
+      margin-top: -0.25em;
+      background-image: linear-gradient(rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0),
+          rgba(0, 0, 0, 0.3));
+    }
 
-.label2 {
-  position: relative;
-  top: -1px;
-}
+    .label2 {
+      position: relative;
+      top: -1px;
+    }
 
-.transition2 {
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  transition-duration: 500ms;
-  background-color: rgba(15, 113, 211, 0.6);
-  border-radius: 9999px;
-  width: 0;
-  height: 0;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+    .transition2 {
+      transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+      transition-duration: 500ms;
+      background-color: rgba(15, 113, 211, 0.6);
+      border-radius: 9999px;
+      width: 0;
+      height: 0;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
 
-.button2:hover .transition2 {
-  width: 14em;
-  height: 14em;
-}
+    .button2:hover .transition2 {
+      width: 14em;
+      height: 14em;
+    }
 
-.button2:active {
-  transform: scale(0.97);
-}
-
-    </style>
+    .button2:active {
+      transform: scale(0.97);
+    }
+  </style>
 </head>
+
 <body>
-    <h1>Retirando Tonner</h1>
-    
-    <form method="post" class="" style="text-align: start; font-size: 28px;">
-        <center>
-            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="120px" style="border-radius: 10px;">
-        </center>
-        <p>Nombre Producto: <span style="color: #0056b3;">{{ producto.nombre }}</span></p>
-        <hr>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <center>
-            <button type="submit">
-                <span class="transition"></span>
-                <span class="gradient"></span>
-                <span class="label">Pedir</span>
-            </button>
+  <h1>Retirando Tonner</h1>
 
-            <button class="button2" type="submit">
-                <a href="{% url 'L_Tonner' %}" style="text-decoration: none; color: white;">
-                    <span class="transition2"></span>
-                    <span class="gradient2"></span>
-                    <span class="label2">Volver</span>
-                </a>
-            </button>
-              
-                
+  <form method="post" class="" style="text-align: start; font-size: 28px;">
+    <center>
+      <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="120px" style="border-radius: 10px;">
+    </center>
+    <p>Nombre Producto: <span style="color: #0056b3;">{{ producto.nombre }}</span></p>
+    <hr>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <center>
+      <button type="submit">
+        <span class="transition"></span>
+        <span class="gradient"></span>
+        <span class="label">Pedir</span>
+      </button>
 
-        </center>
-    </form>
+      <button class="button2" type="submit">
+        <a href="{% url 'L_Tonner' %}" style="text-decoration: none; color: white;">
+          <span class="transition2"></span>
+          <span class="gradient2"></span>
+          <span class="label2">Volver</span>
+        </a>
+      </button>
+
+
+
+    </center>
+  </form>
 </body>
+
 </html>
 
 {% endblock %}

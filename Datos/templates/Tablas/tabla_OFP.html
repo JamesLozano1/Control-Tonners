@@ -108,6 +108,7 @@
     </style>
 </head>
 <body>
+    {% include 'layouts/Nav_Tablas.html' %}
    <div>
     <h1>TABLA DE IMPRESORAS OFICINA PRINCIPAL</h1>
     <a class="Btn" href="{% url 'Tabla_Impresoras_OFC' %}">
@@ -166,7 +167,6 @@
             {% endfor %}
         </tbody>
     </table>
-    {{ cuerpo }}
 </body>
 </html>
 

@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners
-from .forms import FormArea, FormPersona, FormTonner, FormsRetiroTonner,FormsTabla_Toners
+from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners, Tabla_T_Toners_Municipios
+from .forms import FormArea, FormPersona, FormTonner, FormsRetiroTonner,FormsTabla_Toners, FormsTabla_Toners_Municipios
 import base64
 from django.core.files.base import ContentFile
 
@@ -27,18 +27,18 @@ def Area_U(request):
 
 def Persona_U(request):
     if request.method == 'POST':
-        form = FormPersona(request.POST, request.FILES)  # Inicializar el formulario con datos de la solicitud POST
-        if form.is_valid():  # Verificar si el formulario es válido
-            firma_data = request.POST.get('firma_imagen')  # Obtener los datos de la firma en base64
-            persona = form.save(commit=False)  # Guardar el formulario sin confirmar la instancia de Persona
+        form = FormPersona(request.POST, request.FILES)  
+        if form.is_valid():  
+            firma_data = request.POST.get('firma_imagen') 
+            persona = form.save(commit=False) 
             if firma_data:
-                format, imgstr = firma_data.split(';base64,')  # Separar los datos base64
-                ext = format.split('/')[-1]  # Obtener la extensión del archivo
-                # Guardar la imagen de la firma en el campo 'firma' del modelo Persona
+                format, imgstr = firma_data.split(';base64,')  
+                ext = format.split('/')[-1]  
+                
                 persona.firma.save(f'firma_{persona.nombre}.{ext}', ContentFile(base64.b64decode(imgstr)), save=False)
-                persona.save()  # Guardar la instancia completa de Persona con la firma
+                persona.save()  
     else:
-        form = FormPersona()  # Inicializar el formulario para una solicitud GET
+        form = FormPersona()  
 
     return render(request, 'registro/R_Persona.html', {
         'form': form,
@@ -57,12 +57,6 @@ def Tonner_U(request):
         'form': form,
     })
 
-def Tonners(request):
-    tonners = Tonner.objects.all()
-
-    return render(request, 'vista/tonners.html', {
-        "tonner":tonners,
-    })
 
 def Editar_Tonner(request, producto_id):
     producto = get_object_or_404(Tonner, pk=producto_id)
@@ -141,10 +135,31 @@ def Tabla_D_Toners(request):
         'form': form,
     })
 
+
 def V_Toners_R(request):
     producto = Retiro_Tonner.objects.all()
 
     return render(request, 'vista/T_Ocupado.html', {
+        'producto':producto,
+    })
+
+def Tabla_D_Toners_Municipios(request):
+
+    if request.method == 'POST':
+        form = FormsTabla_Toners_Municipios(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('Ver_Tabla_Municipios')
+    else:
+        form = FormsTabla_Toners_Municipios()
+    return render(request, 'Tablas/añadir_municipio.html',{
+        'form': form,
+    })
+
+def ver_tabla_municipios(request):
+    producto = Tabla_T_Toners_Municipios.objects.all()
+
+    return render(request, 'Tablas/tabla_municipios.html', {
         'producto':producto,
     })
 
@@ -171,3 +186,5 @@ def detalle_retiro_toner(request, producto_id):
     retiro_toner = get_object_or_404(Retiro_Tonner, pk=producto_id)
 
     return render(request, 'vista/ver_T_EnUso.html', {'retiro_toner': retiro_toner})
+
+

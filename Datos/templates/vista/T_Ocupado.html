@@ -1,129 +1,139 @@
-    {% extends 'layouts/base.html' %}
+{% extends 'layouts/base.html' %}
 
-    {% block content %}
-    {% load static %}
-    {% include 'layouts/Barra_Tonners.html' %}
+{% block content %}
+{% load static %}
+{% include 'layouts/Barra_Tonners.html' %}
+<br>
+<br>
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de Tonners Retirados</title>
+</head>
+
+<body>
+    <h1>Listado de Tonners Retirados</h1>
     <br>
-    <br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Tonner</th>
+                <th>Area</th>
+                <th>Persona</th>
+                <th>Cantidad Retirada</th>
+                <th>Fecha de Retiro</th>
+                <th>ver</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in producto %}
+            <tr>
+                <td>{{ item.r_tonner }}</td>
+                <td>{{ item.r_persona.area }}</td>
+                <td>{{ item.r_persona }}</td>
+                <td>{{ item.cantidad_retirada }}</td>
+                <td>{{ item.fecha_retiro }}</td>
+                <td>
+                    <a href="{% url 'detalle_retiro_toner' item.pk %}" class="btn">Ver Detalles</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-    <!DOCTYPE html>
-    <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Listado de Tonners Retirados</title>
-    </head>
-    <body>
-        <h1>Listado de Tonners Retirados</h1>
-    <br>
-        <table border="1">
-            <thead>
-                <tr>
-                    <th>Tonner</th>
-                    <th>Area</th>
-                    <th>Persona</th>
-                    <th>Cantidad Retirada</th>
-                    <th>Fecha de Retiro</th>
-                    <th>ver</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in producto %}
-                <tr>
-                    <td>{{ item.r_tonner }}</td>
-                    <td>{{ item.r_persona.area }}</td>
-                    <td>{{ item.r_persona }}</td>
-                    <td>{{ item.cantidad_retirada }}</td>
-                    <td>{{ item.fecha_retiro }}</td>
-                    <td>
-                        <a href="{% url 'detalle_retiro_toner' item.pk %}" class="btn">Ver Detalles</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+</body>
 
-    </body>
-    </html>
+</html>
 
-        <style>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
 
-            * {
-                padding: 0;
-                margin: 0;
-            }
-            .btn{
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
-            text-align: center;
-            text-decoration: none;
-            background-color: black; 
-            color: #fff;
-            border-radius: 5px;
-        }
-        .btn:hover{
-            background-color: #fff;
-            color: black;
-            border: 1px solid black;
-        }
-            .btn2{
-                display: inline-block;
-                padding: 10px 20px;
-                margin-top: 20px;
-                text-align: center;
-                text-decoration: none;
-                background-color: #d82121; 
-                color: #fff;
-                border-radius: 5px;
-            }
-            .btn2:hover{
-                background-color: #571313;
-            }
-            .btn3{
-                display: inline-block;
-                padding: 10px 20px;
-                margin-top: 20px;
-                text-align: center;
-                text-decoration: none;
-                background-color: #198a1e; 
-                color: #fff;
-                border-radius: 5px;
-            }
-            .btn3:hover{
-                background-color: #62d446;
-            }
-        
+    .btn {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        text-align: center;
+        text-decoration: none;
+        background-color: black;
+        color: #fff;
+        border-radius: 5px;
+    }
 
-            h1 {
-                text-align: center;
-                color: #333;
-            }
+    .btn:hover {
+        background-color: #fff;
+        color: black;
+        border: 1px solid black;
+    }
 
-            table {
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 20px;
-            }
+    .btn2 {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #d82121;
+        color: #fff;
+        border-radius: 5px;
+    }
 
-            th, td {
-                padding: 10px;
-                text-align: center;;
-                border: 1px solid #ddd;
-            }
+    .btn2:hover {
+        background-color: #571313;
+    }
 
-            th {
-                background-color: #f2f2f2;
-                color: #333;
-            }
+    .btn3 {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #198a1e;
+        color: #fff;
+        border-radius: 5px;
+    }
 
-            tr:nth-child(even) {
-                background-color: #f9f9f9;
-            }
+    .btn3:hover {
+        background-color: #62d446;
+    }
 
-            tr:hover {
-                background-color: #f1f1f1;
-            }
-        </style>
-    {% endblock %}
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        text-align: center;
+        ;
+        border: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+        color: #333;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f1f1f1;
+    }
+</style>
+{% endblock %}

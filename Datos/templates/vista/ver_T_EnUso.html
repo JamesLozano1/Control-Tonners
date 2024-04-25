@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -50,7 +51,7 @@
         }
 
         img {
-            width: 400px; 
+            width: 400px;
             height: 90px;
             height: auto;
             display: block;
@@ -73,6 +74,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Detalles del retiro</h1>
@@ -80,7 +82,9 @@
         <div class="details">
             <p>Detalles del Usuario:</p>
             <ul>
-                <li><strong>Usuario:</strong> <h3>{{ retiro_toner.r_persona }}</h3></li>
+                <li><strong>Usuario:</strong>
+                    <h3>{{ retiro_toner.r_persona }}</h3>
+                </li>
                 <li><strong>Firma:</strong></li>
                 <li><img src="{{ retiro_toner.r_persona.firma.url }}" alt="Firma" /></li>
                 <li><strong>Área:</strong> {{ retiro_toner.r_persona.area }}</li>
@@ -107,4 +111,5 @@
         <a href="{% url 'V_Toners_R' %}">Volver a la lista de Tonners</a>
     </div>
 </body>
+
 </html>
