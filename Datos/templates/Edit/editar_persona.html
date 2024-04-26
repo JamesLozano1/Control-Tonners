@@ -7,14 +7,9 @@
 
 <br>
 <div class="container">
-  <h2 style="text-align: center;">Registro de Persona</h2>
+  <h2 style="text-align: center;">Editar Información de Persona</h2>
   <br>
 
-  <div class="link-container" style="display: flex; justify-content: space-evenly;">
-    <a href="{% url 'Listado_Personas' %}" class="styled-link">Lista de Personas</a>
-  </div>
-
-  <br>
 
   <form method="post" enctype="multipart/form-data" style="max-width: 600px; margin: 0 auto;">
     {% csrf_token %}
@@ -65,24 +60,6 @@
 </div>
 
 <style>
-  .link-container {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.styled-link {
-    text-decoration: none;
-    color: #045cab;
-    padding: 10px;
-    border: 1px solid #045cab;
-    border-radius: 5px;
-}
-
-  .styled-link:hover {
-    background-color: #045cab;
-    color: white;
-  }
-
   #canvas {
     border: 1px solid #ccc;
     cursor: crosshair;

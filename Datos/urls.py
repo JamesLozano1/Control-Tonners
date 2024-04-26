@@ -10,12 +10,19 @@ urlpatterns = [
     ## REGISTRAR PERSONA, AREA
     path('R_Area/', views.Area_U, name='R_Area'),
     path('R_Persona/', views.Persona_U, name='R_Persona'),
+    path('buscar_Persona/', views.buscar_Persona, name='buscar_Persona'),
+
+    path('Lista/the/personas/', views.Listado_Personas, name='Listado_Personas'),
+
+    path('Edit_Persona/<int:producto_id>/', views.Editar_Persona, name='Editar_Persona'),
+
 
     path('E_Tonner/', views.E_Recarga, name='E_Tonner'),    
 
     ## TONER DISPONIBLE
     path('R_Tonner/', views.Tonner_U, name='R_Tonner'),
     path('L_Tonner/', views.E_Libre, name='L_Tonner'),
+    path('buscar_Toners/', views.buscar_toners, name='buscar_Toners'),
 
     ## EDITAR TONER
     path('ED_Tonner/<int:producto_id>/', views.Editar_Tonner, name='ED_Tonner'),    
@@ -23,8 +30,10 @@ urlpatterns = [
     ## TABLAS DE IMPRESORAS
     path('Tabla_Impresoras_OFC/', views.Tabla_Impresoras_OFC, name='Tabla_Impresoras_OFC'),
     path('Tabla/Impresoras/Municipios/', views.Tabla_D_Toners_Municipios, name='Tabla_D_Toners_Municipios'),
-    path('Ver_Tabla/', views.Ver_Tabla, name='Ver_Tabla'),
+    path('Ver_Tabla_OFP/', views.Ver_Tabla, name='Ver_Tabla'),
     path('Ver/Tabla/Municipios', views.ver_tabla_municipios, name='Ver_Tabla_Municipios'),
+    path('buscar_T_OFP/', views.buscar_T_OFP, name='buscar_T_OFP'),
+    path('buscar_Tabla_T_Toners_Municipios/', views.buscar_Tabla_T_Toners_Municipios, name='buscar_Tabla_T_Toners_Municipios'),
 
 
     ## RETIRO DE TONNERS

@@ -30,7 +30,7 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       padding: 20px;
       margin: 20px;
-      width: 300px;
+      width: max-content;
       max-width: 100%;
     }
 
@@ -236,19 +236,21 @@
     {% csrf_token %}
     {{ form.as_p }}
     <center>
-      <button type="submit">
-        <span class="transition"></span>
-        <span class="gradient"></span>
-        <span class="label">Pedir</span>
-      </button>
+      <div style="display: flex; justify-content: space-evenly; ">
+        <button type="submit">
+          <span class="transition"></span>
+          <span class="gradient"></span>
+          <span class="label">Entregar</span>
+        </button>
 
-      <button class="button2" type="submit">
-        <a href="{% url 'L_Tonner' %}" style="text-decoration: none; color: white;">
-          <span class="transition2"></span>
-          <span class="gradient2"></span>
-          <span class="label2">Volver</span>
-        </a>
-      </button>
+        <button class="button2" type="submit">
+          <a href="{% url 'L_Tonner' %}" style="text-decoration: none; color: white;">
+            <span class="transition2"></span>
+            <span class="gradient2"></span>
+            <span class="label2">Volver</span>
+          </a>
+        </button>
+      </div>
 
 
 

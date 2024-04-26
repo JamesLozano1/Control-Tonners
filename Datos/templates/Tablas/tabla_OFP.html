@@ -6,12 +6,13 @@
 <br>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impresoras OFP</title>
     <style>
-        a{
+        a {
             text-decoration: none;
         }
 
@@ -26,9 +27,10 @@
             margin-top: 20px;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
-            text-align: center; 
+            text-align: center;
             border: 1px solid #ddd;
         }
 
@@ -50,6 +52,7 @@
             font-style: italic;
             color: #999;
         }
+
         .Btn {
             display: flex;
             align-items: center;
@@ -76,6 +79,7 @@
             justify-content: center;
             padding: 15px;
         }
+
         .text {
             position: absolute;
             right: 0%;
@@ -86,6 +90,7 @@
             font-weight: 500;
             transition-duration: .3s;
         }
+
         .Btn:hover {
             width: 125px;
             border-radius: 0px;
@@ -95,6 +100,7 @@
         .Btn:hover .sign {
             transition-duration: .3s;
         }
+
         .Btn:hover .text {
             opacity: 1;
             width: 70%;
@@ -102,20 +108,66 @@
         }
 
         .Btn:active {
-        transform: translate(2px ,2px);
+            transform: translate(2px, 2px);
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input {
+            border: solid 1.5px #9e9e9e;
+            border-radius: 1rem;
+            background: none;
+            padding: 1rem;
+            font-size: 1rem;
+            color: black;
+            transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .user-label {
+            position: absolute;
+            left: 15px;
+            color: #828282;
+            pointer-events: none;
+            transform: translateY(1rem);
+            transition: 150ms cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .input:focus, .input:valid {
+            outline: none;
+            border: 1.5px solid #1a73e8;
+        }
+
+        .input:focus ~ .user-label, .input:valid ~ .user-label {
+            transform: translateY(-50%) scale(0.8);
+            background-color: #fff;
+            padding: 0 .2em;
+            color: #2196f3;
         }
 
     </style>
 </head>
+
 <body>
     {% include 'layouts/Nav_Tablas.html' %}
-   <div>
     <h1>TABLA DE IMPRESORAS OFICINA PRINCIPAL</h1>
-    <a class="Btn" href="{% url 'Tabla_Impresoras_OFC' %}">
-        <div class="sign">+</div>
-        <div class="text">Crear</div>
-    </a>
-</div>
+    <br>
+    <div style="display: flex; justify-content: space-evenly;">
+        <a class="Btn" href="{% url 'Tabla_Impresoras_OFC' %}">
+            <div class="sign">+</div>
+            <div class="text">Crear</div>
+        </a>
+
+        <form method="GET" action="{% url 'buscar_T_OFP' %}">
+            <div class="input-group">
+                <input required="" type="text" name="q" autocomplete="off" class="input">
+                <label class="user-label">Buscar Impresora</label>
+            </div>
+        </form>
+        <a href="{% url 'Ver_Tabla' %}" class="btn">Todo</a>
+
+    </div>
 
 
     <table border="1">
@@ -135,31 +187,31 @@
             {% for item in tabla %}
             <tr>
                 {% if item.numero_impresoras == 0 %}
-                    <td style="color: red;">{{ item.oficina }}</td>
-                    <td style="color: red;">{{ item.activo }}</td>
-                    <td style="color: red;">{{ item.numero_impresoras }}</td>
-                    <td style="color: red;">{{ item.referencia }}</td>
-                    <td style="color: red;">{{ item.marca }}</td>
-                    <td style="color: red;">{{ item.toner_de_impresora }}</td>
-                    <td style="color: red;">{{ item.otro_toner }}</td>
-                    <td style="color: red;">{{ item.cantidad_toner }}</td>
+                <td style="color: red;">{{ item.oficina }}</td>
+                <td style="color: red;">{{ item.activo }}</td>
+                <td style="color: red;">{{ item.numero_impresoras }}</td>
+                <td style="color: red;">{{ item.referencia }}</td>
+                <td style="color: red;">{{ item.marca }}</td>
+                <td style="color: red;">{{ item.toner_de_impresora }}</td>
+                <td style="color: red;">{{ item.otro_toner }}</td>
+                <td style="color: red;">{{ item.cantidad_toner }}</td>
                 {% else %}
-                    <td>{{ item.oficina }}</td>
-                    <td>{{ item.activo }}</td>
-                    <td>{{ item.numero_impresoras }}</td>
-                    <td>{{ item.referencia }}</td>
-                    <td>{{ item.marca }}</td>
-                    <td>{{ item.toner_de_impresora }}</td>
-                    {% if item.otro_toner == "N/A" %}
-                        <td style="color: red;">{{ item.otro_toner }}</td>
-                        <td style="color: red;">{{ item.cantidad_toner }}</td>
-                    {% else %}
-                        <td>{{ item.otro_toner }}</td>
-                        <td>{{ item.cantidad_toner }}</td>
-                    {% endif %}
+                <td>{{ item.oficina }}</td>
+                <td>{{ item.activo }}</td>
+                <td>{{ item.numero_impresoras }}</td>
+                <td>{{ item.referencia }}</td>
+                <td>{{ item.marca }}</td>
+                <td>{{ item.toner_de_impresora }}</td>
+                {% if item.otro_toner == "N/A" %}
+                <td style="color: red;">{{ item.otro_toner }}</td>
+                <td style="color: red;">{{ item.cantidad_toner }}</td>
+                {% else %}
+                <td>{{ item.otro_toner }}</td>
+                <td>{{ item.cantidad_toner }}</td>
                 {% endif %}
-                
-                </tr>
+                {% endif %}
+
+            </tr>
             {% empty %}
             <tr>
                 <td colspan="8">No hay datos disponibles.</td>
@@ -168,6 +220,7 @@
         </tbody>
     </table>
 </body>
+
 </html>
 
 {% endblock %}

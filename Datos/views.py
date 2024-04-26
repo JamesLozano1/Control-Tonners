@@ -188,3 +188,48 @@ def detalle_retiro_toner(request, producto_id):
     return render(request, 'vista/ver_T_EnUso.html', {'retiro_toner': retiro_toner})
 
 
+def Listado_Personas(request):
+    producto = Persona.objects.all()
+    return render(request, 'vista/lista_personas.html', {
+        'producto':producto,
+    })
+
+
+def Editar_Persona(request, producto_id):
+    producto = get_object_or_404(Persona, pk=producto_id)
+    if request.method == 'POST':
+        form = FormPersona(request.POST, request.FILES, instance=producto)
+        if form.is_valid():
+            form.save()
+    else:
+        form = FormPersona(instance=producto)
+    return render(request, 'Edit/editar_persona.html', {'form': form})
+
+def buscar_Persona(request):
+    query = request.GET.get('q', '')  
+
+    personas = Persona.objects.filter(nombre__icontains=query)  
+    areas = Area.objects.filter(nombre__icontains=query)
+
+    producto = list(personas) + list(areas)
+
+    return render(request, 'vista/lista_personas.html', {'producto': producto})
+
+def buscar_T_OFP(request):
+    query = request.GET.get('q', '')  
+
+    tabla = Tabla_T_Toners.objects.filter(oficina__icontains=query)
+
+    return render(request, 'Tablas/tabla_OFP.html', {'tabla': tabla})
+
+def buscar_Tabla_T_Toners_Municipios(request):
+    query = request.GET.get('q', '')  
+
+    producto = Tabla_T_Toners_Municipios.objects.filter(oficina__icontains=query)
+
+    return render(request, 'Tablas/tabla_municipios.html', {'producto': producto})
+
+def buscar_toners(request):
+    query = request.GET.get('q')
+    LItonner = Tonner.objects.filter(nombre__icontains=query) if query else []
+    return render(request, 'vista/T_Libre.html', {'LItonner': LItonner})
