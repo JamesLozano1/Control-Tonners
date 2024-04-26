@@ -1,5 +1,5 @@
 from django import forms
-from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners, Tabla_T_Toners_Municipios
+from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners, Tabla_T_Toners_Municipios, Recargar_Toner
 import base64
 from django.core.files.base import ContentFile
 
@@ -49,3 +49,9 @@ class FormsTabla_Toners_Municipios(forms.ModelForm):
         model = Tabla_T_Toners_Municipios
         fields = '__all__'
 
+class formsRecargando(forms.ModelForm):
+    class Meta:
+        model = Recargar_Toner
+        fields = '__all__'
+
+        

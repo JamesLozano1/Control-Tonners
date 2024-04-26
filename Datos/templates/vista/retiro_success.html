@@ -8,29 +8,43 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1>Retiro Exitoso</h1>
-        <div class="details">
-            <p>Detalles del Producto Retirado:</p>
-            <ul>
-                <li>Nombre: {{ producto.nombre }}</li>
-                <li>Modelo: {{ producto.modelo }}</li>
-                <li>Cantidad Disponible Después del Retiro: {{ retiro.cantidad_disponible }}</li>
-            </ul>
+    <center>
 
-            <p>Detalles del Retiro:</p>
-            <ul>
-                <li>Cantidad Retirada: {{ retiro.cantidad_retirada }}</li>
-                <li>Fecha de Retiro: {{ retiro.fecha_retiro }}</li>
-            </ul>
+        <div class="container">
+            <h1>Retiro Exitoso</h1>
+            <div class="details">
+                <p>Detalles del Producto Retirado:</p>
+                <ul>
+                    <li>Nombre: {{ producto.nombre }}</li>
+                    <li>Modelo: {{ producto.modelo }}</li>
+                    <li>Cantidad Disponible Después del Retiro: {{ retiro.cantidad_disponible }}</li>
+                </ul>
+
+                <p>Detalles del Retiro:</p>
+                <ul>
+                    <li>Cantidad Retirada: {{ retiro.cantidad_retirada }}</li>
+                    <li>Fecha de Retiro: {{ retiro.fecha_retiro }}</li>
+                </ul>
+            </div>
+
+            <a href="{% url 'L_Tonner' %}" style="padding: 1rem;">Volver a la lista de Tonners</a>
         </div>
-
-        <a href="{% url 'L_Tonner' %}">Volver a la lista de Tonners</a>
-    </div>
+    </center>
 </body>
 
 </html>
 <style>
+    .container {
+        font-family: inherit;
+        font-size: 35px;
+        border: 1px solid #007bff;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px;
+        text-align: center;
+        width: max-content;
+    }
+
     body {
         font-family: Arial, sans-serif;
         background-color: #f5f5f5;

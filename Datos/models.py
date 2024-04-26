@@ -59,7 +59,14 @@ class Retiro_Tonner(models.Model):
 
 ## RECARGA DE TONER ⬇ ------------------------------------------------------------------------------------
 
+class Recargar_Toner(models.Model):
+    toner = models.ForeignKey(Tonner, on_delete=models.SET_NULL, null=True, blank=True)
+    cantidad_Recargar = models.PositiveIntegerField()
+    fecha_Recarga = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return f"{self.toner} - Recargando"
+    
 ## RECARGA DE TONER ⬆ ------------------------------------------------------------------------------------
 
 
