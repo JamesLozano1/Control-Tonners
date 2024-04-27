@@ -181,6 +181,7 @@
                 <th>TONER</th>
                 <th>OTRO TONER</th>
                 <th>CANTIDAD OTROS</th>
+                <th>Editar</th>
             </tr>
         </thead>
         <tbody>
@@ -210,6 +211,7 @@
                 <td>{{ item.cantidad_toner }}</td>
                 {% endif %}
                 {% endif %}
+                <td><a href="{% url 'Tabla_T_Toners_OFP' item.id %}">✏</a></td>
 
             </tr>
             {% empty %}

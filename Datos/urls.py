@@ -35,6 +35,10 @@ urlpatterns = [
     path('buscar_T_OFP/', views.buscar_T_OFP, name='buscar_T_OFP'),
     path('buscar_Tabla_T_Toners_Municipios/', views.buscar_Tabla_T_Toners_Municipios, name='buscar_Tabla_T_Toners_Municipios'),
 
+    ## EDITAR TABLAS
+    path('editar_t_municipios/<int:producto_id>/', views.editar_t_municipios, name='editar_t_municipios'),
+    path('Tabla_T_Toners_OFP/<int:producto_id>/', views.Tabla_T_Toners_OFP, name='Tabla_T_Toners_OFP'),
+
 
     ## RETIRO DE TONNERS
     path('retirar_Tonner/<int:producto_id>/', views.RetiroTonner, name='retiroTonner'),

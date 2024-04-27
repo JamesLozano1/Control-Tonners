@@ -29,7 +29,7 @@
 <div class="container" style="flex-direction: row; flex-wrap: wrap; justify-content: center; align-items: center;">
 
     {% for producto in LItonner %}
-    <div class="card shadow" style="margin-right: 20px;">
+    <div class="card shadow" style="margin-right: 20px; border-radius: 5px;">
         <center>
             {% if producto.imagen %}
             <img src="{{ producto.imagen.url }}" style="width: 90px; height: 95px;">

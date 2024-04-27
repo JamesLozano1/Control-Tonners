@@ -14,7 +14,7 @@
             <li class="{% if request.path == '/R_Persona/' %}active{% elif request.path == '/R_Area/'%} active {% endif %}">
                 <a href="{% url 'R_Area' %}">Usuario </a>
             </li>
-            <li class="{% if request.path == '/Ver_Tabla/' %}active{% elif request.path == '/Tabla_Impresoras_OFC/'%}active{% elif request.path == '/Tabla_D_Toners_Municipios/'%}active{% elif request.path == '/Ver_Tabla_Municipios/'%}active{% endif %}">
+            <li class="{% if request.path == '/Ver_Tabla/' %}active{% elif request.path == '/Tabla_Impresoras_OFC/' %}active{% elif request.path == '/Tabla_D_Toners_Municipios/' %}active{% elif request.path == '/Ver/Tabla/Municipios/' %}active{% endif %}">
                 <a href="{% url 'Ver_Tabla' %}">Impresoras </a>
             </li>
             <li class="{% if request.path == '/L_Tonner/' %}active{% elif request.path == '/V_Toners_R/'%} active {% elif request.path == '/E_Tonner/'%} active{% elif request.path == '/R_Tonner/'%} active{% endif %}">

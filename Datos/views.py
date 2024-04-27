@@ -4,6 +4,8 @@ from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners, Tabla_
 from .forms import FormArea, FormPersona, FormTonner, FormsRetiroTonner,FormsTabla_Toners, FormsTabla_Toners_Municipios
 import base64
 from django.core.files.base import ContentFile
+from collections import Counter
+
 
 def Inicio(request):
     title = 'BIENVENIDO'
@@ -233,3 +235,83 @@ def buscar_toners(request):
     query = request.GET.get('q')
     LItonner = Tonner.objects.filter(nombre__icontains=query) if query else []
     return render(request, 'vista/T_Libre.html', {'LItonner': LItonner})
+
+def editar_t_municipios(request, producto_id):
+    producto = get_object_or_404(Tabla_T_Toners_Municipios, id=producto_id)
+
+    if request.method == 'POST':
+        form = FormsTabla_Toners_Municipios(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+    else:
+        form = FormsTabla_Toners_Municipios(instance=producto)
+    return render(request, 'Edit/Editar_T_Municipios.html', {'form': form,})
+
+def Tabla_T_Toners_OFP(request, producto_id):
+    producto = get_object_or_404(Tabla_T_Toners, id=producto_id)
+
+    if request.method == 'POST':
+        form = FormsTabla_Toners(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+    else:
+        form = FormsTabla_Toners(instance=producto)
+    return render(request, 'Edit/Editar_T_OFP.html', {'form': form,})
+
+## LO COMPLICADO ⬇
+
+def add_Lista_de_Recarga(request, producto_id):
+    producto = get_object_or_404(Tonner, pk=producto_id)
+
+    carrito = request.COOKIES.get('carrito')
+    if carrito:
+        carrito = carrito.split(',')
+    else:
+        carrito = []
+
+    carrito.append(str(producto_id))
+
+    response = redirect('detalle_producto', producto_id=producto_id)
+    response.set_cookie('carrito', ','.join(carrito))
+
+    return response
+
+def eliminar_de_Lista_Recarga(request, producto_id):
+    producto = get_object_or_404(Tonner, pk=producto_id)
+
+    carrito = request.COOKIES.get('carrito')
+    if carrito:
+        carrito = carrito.split(',')
+    else:
+        carrito = []
+
+    if str(producto_id) in carrito:
+        carrito.remove(str(producto_id))
+
+    response = redirect('ver_carrito')
+    response.set_cookie('carrito', ','.join(carrito))
+
+    return response
+
+def ver_carrito(request):
+    carrito = request.COOKIES.get('carrito')
+    productos_en_carrito = []
+    productos = Tonner.objects.all()
+
+    if carrito:
+        carrito = carrito.split(',')
+        carrito_count = Counter(carrito)  
+        producto_ids = carrito_count.keys()
+        productos = Tonner.objects.filter(id__in=producto_ids)
+
+        for producto in productos:
+            cantidad = carrito_count[str(producto.id)] 
+            productos_en_carrito.append({'producto': producto, 'cantidad': cantidad})
+
+    return render(request, 'carrito.html', {
+        'productos_en_carrito': productos_en_carrito,
+        'producto':productos,
+
+    })
+
+## LO COMPLICADO ⬆
