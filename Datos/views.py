@@ -258,21 +258,32 @@ def Tabla_T_Toners_OFP(request, producto_id):
         form = FormsTabla_Toners(instance=producto)
     return render(request, 'Edit/Editar_T_OFP.html', {'form': form,})
 
+
+
 ## LO COMPLICADO ⬇
+
+def Toner_Recarga(request):
+    Toner = Tonner.objects.all()
+    return render(request, 'carrito/Toner_Recargar_html', {
+        'toner':Toner,
+    })
 
 def add_Lista_de_Recarga(request, producto_id):
     producto = get_object_or_404(Tonner, pk=producto_id)
 
+    # Obtiene los productos almacenados en la cookie del carrito
     carrito = request.COOKIES.get('carrito')
     if carrito:
-        carrito = carrito.split(',')
+        carrito = carrito.split(',')  # Convierte la cadena en una lista
     else:
         carrito = []
 
+    # Agrega el producto actual al carrito
     carrito.append(str(producto_id))
 
+    # Crea una respuesta de redirección y establece la cookie del carrito
     response = redirect('detalle_producto', producto_id=producto_id)
-    response.set_cookie('carrito', ','.join(carrito))
+    response.set_cookie('carrito', ','.join(carrito))  # Convierte la lista en una cadena separada por comas
 
     return response
 
@@ -299,19 +310,18 @@ def ver_carrito(request):
     productos = Tonner.objects.all()
 
     if carrito:
-        carrito = carrito.split(',')
-        carrito_count = Counter(carrito)  
-        producto_ids = carrito_count.keys()
-        productos = Tonner.objects.filter(id__in=producto_ids)
+        carrito = carrito.split(',')  # Convertir la cadena en una lista
+        carrito_count = Counter(carrito)  # Contar la cantidad de cada producto en el carrito
+        producto_ids = carrito_count.keys()  # Obtener los IDs de los productos en el carrito
+        productos = Tonner.objects.filter(id__in=producto_ids)  # Obtener los objetos Tonner correspondientes a los IDs
 
         for producto in productos:
-            cantidad = carrito_count[str(producto.id)] 
+            cantidad = carrito_count[str(producto.id)]  # Obtener la cantidad del producto en el carrito
             productos_en_carrito.append({'producto': producto, 'cantidad': cantidad})
 
-    return render(request, 'carrito.html', {
-        'productos_en_carrito': productos_en_carrito,
-        'producto':productos,
+    return render(request, 'carrito.html', {'productos_en_carrito': productos_en_carrito})
 
-    })
+
+
 
 ## LO COMPLICADO ⬆

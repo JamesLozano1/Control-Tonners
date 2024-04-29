@@ -45,6 +45,12 @@ urlpatterns = [
     path('V_Toners_R/', views.V_Toners_R, name='V_Toners_R'),
     path('toners-retirados/<int:producto_id>/', views.detalle_retiro_toner, name='detalle_retiro_toner'),
 
+    ## Reacargar
+    path('add_lista_de_recarga/<int:producto_id>/', views.add_Lista_de_Recarga, name='add_lista_de_recarga'),
+    path('eliminar_de_lista_recarga/<int:producto_id>/', views.eliminar_de_Lista_Recarga, name='eliminar_de_lista_recarga'),
+    path('ver_carrito/', views.ver_carrito, name='ver_carrito'),
+    path('Toner_Recarga/', views.Toner_Recarga, name='Toner_Recarga'),
+
 ]
 
 
