@@ -1,22 +1,36 @@
 {% extends 'layouts/base.html' %}
 
+{% load static %}
+
 {% block content %}
-<title>Inicio Web</title>
+
+<head>
+    <title>Inicio Web</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/ALL.css' %}">
+</head>
 
 <center>
     <br>
     <h1>
-        {{ title }} 
+        {{ title }}
     </h1>
-    <br>    
+    <br>
     <h3>Bienvenido a la aplicación web de control de toners de la empresa seapto</h3>
     <br>
     <p>
 
-        <h3>sección: <span><h2>Compras</h2></span></h3>
+    <h3>sección: <span>
+            <h2>Compras</h2>
+        </span></h3>
     </p>
     <br>
     <h4>Hecho por pasante SENA del Area de Analisis y Desarrollo de Sistemas de Información(ADSI) </h4>
+    <br>
+    <h1>Comunicarse Con el Creador</h1>
+
+    <h2>Telefono: <a href="3224707277">+57 3224707277</a></h2>
+    
+
     <br>
     <br>
     <br>
@@ -47,6 +61,5 @@
     <br>
 
 </center>
-
 
 {% endblock %}
