@@ -1,37 +1,42 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <nav class="navbar">
         <ul style="display: flex; justify-content: space-evenly;">
             <li>
                 <img src="{% static 'logo.png' %}" alt="Logo" style="width: 250px;" onclick="inicio()">
             </li>
-            <li class="{% if request.path == '/R_Persona/' %}active{% elif request.path == '/R_Area/'%} active {% endif %}">
+            <li
+                class="{% if request.path == '/R_Persona/' %}active{% elif request.path == '/R_Area/'%} active {% endif %}">
                 <a href="{% url 'R_Area' %}">Usuario </a>
             </li>
-            <li class="{% if request.path == '/Ver_Tabla/' %}active{% elif request.path == '/Tabla_Impresoras_OFC/' %}active{% elif request.path == '/Tabla_D_Toners_Municipios/' %}active{% elif request.path == '/Ver/Tabla/Municipios/' %}active{% endif %}">
-                <a href="{% url 'Ver_Tabla' %}">Impresoras </a>
+            <li
+                class="{% if request.path == '/Ver_Tabla_OFP/' %}active{% elif request.path == '/Ver_Tabla_Municipios/' %}active{% elif request.path == '/buscar_T_OFP/' %}active{% elif request.path == '/buscar_Tabla_T_Toners_Municipios/' %}active{% endif %}">
+                <a href="{% url 'Ver_Tabla' %} ">Impresoras </a>
             </li>
-            <li class="{% if request.path == '/L_Tonner/' %}active{% elif request.path == '/V_Toners_R/'%} active {% elif request.path == '/E_Tonner/'%} active{% elif request.path == '/R_Tonner/'%} active{% endif %}">
+            <li
+                class="{% if request.path == '/L_Tonner/' %}active{% elif request.path == '/V_Toners_R/'%} active {% elif request.path == '/E_Tonner/'%} active{% elif request.path == '/R_Tonner/'%} active{% endif %}">
                 <a href="{% url 'L_Tonner' %}">Tonners</a>
-            </li>            
+            </li>
         </ul>
-    </nav>    
+    </nav>
     <div style="padding: 1rem;">
-            {% block content %}
-            {% endblock %}
+        {% block content %}
+        {% endblock %}
     </div>
     {% if request.path == '/R_Area/' %}
 
     {% elif request.path == '/R_Persona/' %}
 
     {% else %}
-        {% include 'layouts/footer.html' %}
+    {% include 'layouts/footer.html' %}
     {% endif %}
     <style>
         footer {
@@ -44,7 +49,7 @@
         footer p {
             font-size: 14px;
             color: #555;
-            margin: 0; 
+            margin: 0;
         }
 
 
@@ -79,6 +84,7 @@
             padding: 20px 30px;
             text-decoration: none;
         }
+
         .navbar .a {
             float: left;
             display: block;
@@ -91,18 +97,19 @@
         .navbar a:hover {
             background-color: #045cab;
             color: white;
-        } 
+        }
 
 
         .navbar .active a {
             color: white;
-            background-color: #045cab; 
+            background-color: #045cab;
             width: max-content;
         }
 
         .navbar .active.green {
             color: white;
-            background-color: #045cab; ; 
+            background-color: #045cab;
+            ;
         }
 
         ul {
@@ -110,66 +117,67 @@
         }
 
         button {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: bold;
-  color: white;
-  background-color: #171717;
-  padding: 1em 2em;
-  border: none;
-  border-radius: .6rem;
-  position: relative;
-  cursor: pointer;
-  overflow: hidden;
-}
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            color: white;
+            background-color: #171717;
+            padding: 1em 2em;
+            border: none;
+            border-radius: .6rem;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border: 1px solid black;
 
-button span:not(:nth-child(6)) {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 30px;
-  width: 30px;
-  background-color: #0c66ed;
-  border-radius: 50%;
-  transition: .6s ease;
-}
+        }
 
-button span:nth-child(6) {
-  position: relative;
-}
+        button span:not(:nth-child(6)) {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            height: 30px;
+            width: 30px;
+            background-color: #0c66ed;
+            border-radius: 50%;
+            transition: .6s ease;
+        }
 
-button span:nth-child(1) {
-  transform: translate(-3.3em, -4em);
-}
+        button span:nth-child(6) {
+            position: relative;
+        }
 
-button span:nth-child(2) {
-  transform: translate(-6em, 1.3em);
-}
+        button span:nth-child(1) {
+            transform: translate(-3.3em, -4em);
+        }
 
-button span:nth-child(3) {
-  transform: translate(-.2em, 1.8em);
-}
+        button span:nth-child(2) {
+            transform: translate(-6em, 1.3em);
+        }
 
-button span:nth-child(4) {
-  transform: translate(3.5em, 1.4em);
-}
+        button span:nth-child(3) {
+            transform: translate(-.2em, 1.8em);
+        }
 
-button span:nth-child(5) {
-  transform: translate(3.5em, -3.8em);
-}
+        button span:nth-child(4) {
+            transform: translate(3.5em, 1.4em);
+        }
 
-button:hover span:not(:nth-child(6)) {
-  transform: translate(-50%, -50%) scale(4);
-  transition: 1.5s ease;
-}
-  
-        
+        button span:nth-child(5) {
+            transform: translate(3.5em, -3.8em);
+        }
+
+        button:hover span:not(:nth-child(6)) {
+            transform: translate(-50%, -50%) scale(4);
+            transition: 1.5s ease;
+        }
     </style>
 </body>
+
 </html>
 
 <script>
-    function inicio(){
+    function inicio() {
         window.location.href = "{% url 'Inicio' %}";
     }
 </script>

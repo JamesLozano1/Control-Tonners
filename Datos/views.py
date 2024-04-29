@@ -5,6 +5,7 @@ from .forms import FormArea, FormPersona, FormTonner, FormsRetiroTonner,FormsTab
 import base64
 from django.core.files.base import ContentFile
 from collections import Counter
+from django.db.models import Sum
 
 
 def Inicio(request):
@@ -161,6 +162,7 @@ def Tabla_D_Toners_Municipios(request):
 def ver_tabla_municipios(request):
     producto = Tabla_T_Toners_Municipios.objects.all()
 
+
     return render(request, 'Tablas/tabla_municipios.html', {
         'producto':producto,
     })
@@ -178,7 +180,7 @@ def Tabla_Impresoras_OFC(request):
         'form': form,
     })
 
-def Ver_Tabla(request):
+def Ver_Tabla_OFP(request):
     tabla = Tabla_T_Toners.objects.all()
     return render(request, 'Tablas/tabla_OFP.html', {
         'tabla':tabla,
@@ -264,7 +266,7 @@ def Tabla_T_Toners_OFP(request, producto_id):
 
 def Toner_Recarga(request):
     Toner = Tonner.objects.all()
-    return render(request, 'carrito/Toner_Recargar_html', {
+    return render(request, 'carrito/Toner_Recargar.html', {
         'toner':Toner,
     })
 
@@ -282,15 +284,16 @@ def add_Lista_de_Recarga(request, producto_id):
     carrito.append(str(producto_id))
 
     # Crea una respuesta de redirección y establece la cookie del carrito
-    response = redirect('detalle_producto', producto_id=producto_id)
+    response = redirect('detalles_toner', producto_id=producto_id)
     response.set_cookie('carrito', ','.join(carrito))  # Convierte la lista en una cadena separada por comas
 
     return response
 
-def eliminar_de_Lista_Recarga(request, producto_id):
+def eliminar_de_lista_recarga(request, producto_id):
     producto = get_object_or_404(Tonner, pk=producto_id)
 
     carrito = request.COOKIES.get('carrito')
+
     if carrito:
         carrito = carrito.split(',')
     else:
@@ -300,6 +303,7 @@ def eliminar_de_Lista_Recarga(request, producto_id):
         carrito.remove(str(producto_id))
 
     response = redirect('ver_carrito')
+
     response.set_cookie('carrito', ','.join(carrito))
 
     return response
@@ -319,9 +323,61 @@ def ver_carrito(request):
             cantidad = carrito_count[str(producto.id)]  # Obtener la cantidad del producto en el carrito
             productos_en_carrito.append({'producto': producto, 'cantidad': cantidad})
 
-    return render(request, 'carrito.html', {'productos_en_carrito': productos_en_carrito})
+    return render(request, 'carrito/carrito.html', {'productos_en_carrito': productos_en_carrito, 'productos':productos })
 
 
 
 
 ## LO COMPLICADO ⬆
+
+def detalles_T_OFP(request):
+    # Obtener una lista de marcas y tipos de toner únicos
+    marcas = Tabla_T_Toners.objects.values_list('marca', flat=True).distinct()
+    tipos_toner = Tabla_T_Toners.objects.values_list('toner_de_impresora', flat=True).distinct()
+
+    # Crear un diccionario para almacenar la cantidad total de impresoras por marca y tipo de toner
+    impresoras_por_marca_toner = {}
+    total_general = 0
+
+    # Calcular la cantidad total de impresoras para cada combinación de marca y tipo de toner
+    for marca in marcas:
+        impresoras_por_marca_toner[marca] = {}
+        for toner in tipos_toner:
+            cantidad_total = Tabla_T_Toners.objects.filter(marca=marca, toner_de_impresora=toner).aggregate(Sum('numero_impresoras'))['numero_impresoras__sum']
+            cantidad = cantidad_total if cantidad_total else 0
+            impresoras_por_marca_toner[marca][toner] = cantidad
+            total_general += cantidad
+
+    return render(request, 'detalles/detalles_T_OFP.html', {
+        'impresoras_por_marca_toner': impresoras_por_marca_toner,
+        'tipos_toner': tipos_toner,
+        'total_general': total_general,
+    })
+
+def detalles_T_Municipios(request):
+    marcas = Tabla_T_Toners_Municipios.objects.values_list('marca', flat=True).distinct()
+    tipos_toner = Tabla_T_Toners_Municipios.objects.values_list('toner_de_impresora', flat=True).distinct()
+
+    impresoras_por_marca_toner = {}
+    total_general = 0
+
+    for marca in marcas:
+        impresoras_por_marca_toner[marca] = {}
+        for toner in tipos_toner:
+            cantidad_total = Tabla_T_Toners_Municipios.objects.filter(marca=marca, toner_de_impresora=toner).aggregate(Sum('numero_impresoras'))['numero_impresoras__sum']
+            cantidad = cantidad_total if cantidad_total else 0
+            impresoras_por_marca_toner[marca][toner] = cantidad
+            total_general += cantidad
+
+    return render(request, 'detalles/detalles_T_Municipios.html', {
+        'impresoras_por_marca_toner': impresoras_por_marca_toner,
+        'tipos_toner': tipos_toner,
+        'total_general': total_general,
+    })
+
+def detalles_toner(request, producto_id):
+    producto = get_object_or_404(Tonner, pk=producto_id)
+
+    return render(request, 'detalles/detalles_toner.html', {
+        'producto':producto,
+    })
