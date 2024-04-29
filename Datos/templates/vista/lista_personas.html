@@ -3,11 +3,12 @@
 {% block content %}
 <br>
 <br>
-
+{% load static %}
 <!DOCTYPE html>
 <html lang="es">
 
 <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/ALL.css' %}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +26,7 @@
             padding: 1rem;
             font-size: 1rem;
             color: black;
-            transition: border 150ms cubic-bezier(0.4,0,0.2,1);
+            transition: border 150ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .user-label {
@@ -34,15 +35,17 @@
             color: #828282;
             pointer-events: none;
             transform: translateY(1rem);
-            transition: 150ms cubic-bezier(0.4,0,0.2,1);
+            transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .input:focus, .input:valid {
+        .input:focus,
+        .input:valid {
             outline: none;
             border: 1.5px solid #1a73e8;
         }
 
-        .input:focus ~ .user-label, .input:valid ~ .user-label {
+        .input:focus~.user-label,
+        .input:valid~.user-label {
             transform: translateY(-50%) scale(0.8);
             background-color: #fff;
             padding: 0 .2em;
@@ -52,25 +55,6 @@
         * {
             padding: 0;
             margin: 0;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
-            text-align: center;
-            text-decoration: none;
-            background-color: black;
-            color: #fff;
-            border-radius: 5px;
-            border: 1px solid black;
-
-        }
-
-        .btn:hover {
-            background-color: #fff;
-            color: black;
-            border: 1px solid black;
         }
 
         h1 {
@@ -131,17 +115,17 @@
         </thead>
         <tbody>
             {% for item in producto %}
-                <tr>
-                    <td>{{ item.nombre }}</td>
-                    <td>{{ item.area }}</td>
-                    <td>
-                        <a href="{% url 'Editar_Persona' item.id %}" class="btn">Editar</a>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.area }}</td>
+                <td>
+                    <a href="{% url 'Editar_Persona' item.id %}" class="btn">Editar</a>
+                </td>
+            </tr>
             {% empty %}
-                <tr>
-                    <td colspan="3">No se encontraron resultados.</td>
-                </tr>
+            <tr>
+                <td colspan="3">No se encontraron resultados.</td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>

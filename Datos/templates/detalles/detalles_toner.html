@@ -8,6 +8,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Detalles del Toner</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/ALL.css' %}">
+
     <style>
 
         h1 {
@@ -35,6 +37,8 @@
         <p><span class="detalle-label">Imagen:</span></p>
         <img src="{{ producto.imagen.url }}" width="200px" height="200px">
     </div>
+
+    <a href="{% url 'Toner_Recarga' %}" class="btn">Volver</a>
 </body>
 
 </html>

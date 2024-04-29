@@ -2,7 +2,9 @@
 
 {% block content %}
 {% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/ALL.css' %}">
 <title>Toners Disponibles</title>
+
 <center>
     {% include 'layouts/Barra_Tonners.html' %}
     <br>
@@ -10,7 +12,7 @@
     <br>
 
 </center>
-<div style="display: flex; justify-content:space-between;">
+<div style="display: flex; justify-content:space-around;">
     <form method="GET" action="{% url 'buscar_Toners' %}">
         <div class="input-group">
             <input required="" type="text" name="q" autocomplete="off" class="input">
@@ -20,7 +22,7 @@
 
     <a href="{% url 'L_Tonner' %}" class="btn">Todo</a>
 
-    <a href="{% url 'ver_carrito' %}" class="btn">Ver Carrito</a>
+    <a href="{% url 'ver_carrito' %}" class="btn">Ver Lista</a>
 
 </div>
 <br>
@@ -88,78 +90,6 @@
         color: #2196f3;
     }
 
-    .btn {
-        display: inline-block;
-        padding: 10px 20px;
-        margin-top: 20px;
-        text-align: center;
-        text-decoration: none;
-        background-color: black;
-        color: #fff;
-        border-radius: 5px;
-    }
-
-    .btn:hover {
-        background-color: #fff;
-        color: black;
-        border: 1px solid black;
-    }
-
-    .btn2 {
-        display: inline-block;
-        padding: 10px 20px;
-        margin-top: 20px;
-        text-align: center;
-        text-decoration: none;
-        background-color: #d82121;
-        color: #fff;
-        border-radius: 5px;
-    }
-
-    .btn2:hover {
-        background-color: #571313;
-    }
-
-    .btn3 {
-        display: inline-block;
-        padding: 10px 20px;
-        margin-top: 20px;
-        text-align: center;
-        text-decoration: none;
-        background-color: black;
-        color: #fff;
-        border-radius: 5px;
-    }
-
-    .btn3:hover {
-        background-color: #fff;
-        color: black;
-        border: 1px solid black;
-    }
-
-    .ver {
-        display: inline-block;
-        padding: 10px 20px;
-        margin-top: 20px;
-        text-align: center;
-        text-decoration: none;
-        background-color: #21a4d8;
-        color: #fff;
-        border-radius: 5px;
-    }
-
-    .ver:hover {
-        background-color: #0056b3;
-    }
-
-    .pre {
-        color: red;
-    }
-
-    .span {
-        color: #363636;
-    }
-
     .container {
         display: flex;
     }
@@ -178,96 +108,5 @@
         width: 300px;
     }
 
-    /*Boton Editar*/
-    .BtnE {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        width: 100px;
-        height: 40px;
-        border: none;
-        padding: 0px 20px;
-        background-color: #14427d;
-        color: white;
-        font-weight: 500;
-        cursor: pointer;
-        border-radius: 10px;
-        box-shadow: 5px 5px 0px #5995c6;
-        transition-duration: .3s;
-    }
-
-    .svgE {
-        width: 13px;
-        position: absolute;
-        right: 0;
-        margin-right: 10px;
-        fill: white;
-        transition-duration: .3s;
-    }
-
-    .BtnE:hover {
-        color: transparent;
-    }
-
-    .BtnE:hover .svgE {
-        right: 43%;
-        margin: 0;
-        padding: 0;
-        border: none;
-        transition-duration: .3s;
-    }
-
-    .BtnE:active {
-        transform: translate(3px, 3px);
-        transition-duration: .3s;
-        box-shadow: 2px 2px 0px #fbe82c;
-    }
-
-    /* Boton pedir*/
-    .BtnP {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        width: 100px;
-        height: 40px;
-        border: none;
-        padding: 0px 20px;
-        background-color: #e32213;
-        color: white;
-        font-weight: 500;
-        cursor: pointer;
-        border-radius: 10px;
-        box-shadow: 5px 5px 0px #ed6f65;
-        transition-duration: .3s;
-    }
-
-    .svgP {
-        width: 13px;
-        position: absolute;
-        right: 0;
-        margin-right: 9px;
-        fill: white;
-        transition-duration: .3s;
-    }
-
-    .BtnP:hover {
-        color: transparent;
-    }
-
-    .BtnP:hover .svgP {
-        right: 43%;
-        margin: 0;
-        padding: 0;
-        border: none;
-        transition-duration: .3s;
-    }
-
-    .BtnP:active {
-        transform: translate(3px, 3px);
-        transition-duration: .3s;
-        box-shadow: 2px 2px 0px #fbe82c;
-    }
 </style>
 {% endblock %}

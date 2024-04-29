@@ -1,9 +1,15 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
+{% load static %}
+
 {% include 'layouts/Barra_user.html' %}
 
-<title>Registro de Persona</title>
+<head>
+  <title>Registro de Persona</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'CSS/ALL.css' %}">
+</head>
+
 
 <br>
 <div class="container">

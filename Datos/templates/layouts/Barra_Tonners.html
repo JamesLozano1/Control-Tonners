@@ -1,12 +1,17 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'CSS/ALL.css' %}">
+
+
 <div style="display: flex; justify-content: space-evenly;">
     <a href="{% url 'Toner_Recarga' %}" class="btn">Recargando</a>
     <a href="{% url 'V_Toners_R' %}" class="btn">En uso</a>
     <a href="{% url 'L_Tonner' %}" class="btn">Disponible</a>
     {% if request.path == '/L_Tonner/' %}
-        <a class="Btn" href="{% url 'R_Tonner' %}" style="margin-top: 1rem;">
-            <div class="sign">+</div>
-            <div class="text">Crear</div>
-        </a>
+    <a class="Btn" href="{% url 'R_Tonner' %}" style="margin-top: 1rem;">
+        <div class="sign">+</div>
+        <div class="text">Crear</div>
+    </a>
     {% endif %}
 
 </div>
@@ -17,7 +22,7 @@
         margin: 0;
     }
 
-    a{
+    a {
         text-decoration: none;
     }
 
@@ -35,64 +40,50 @@
         transition-duration: .3s;
         box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
         background-color: black;
-        
-        }
 
-        .sign {
-            width: min-content;
-            font-size: 2em;
-            color: white;
-            transition-duration: .3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px;
-        }
-        .text {
-            position: absolute;
-            right: 0%;
-            width: 0%;
-            opacity: 0;
-            color: white;
-            font-size: 1.2em;
-            font-weight: 500;
-            transition-duration: .3s;
-        }
-        .Btn:hover {
-            width: 125px;
-            border-radius: 0px;
-            transition-duration: .3s;
-        }
+    }
 
-        .Btn:hover .sign {
-            transition-duration: .3s;
-        }
-        .Btn:hover .text {
-            opacity: 1;
-            width: 70%;
-            transition-duration: .3s;
-        }
+    .sign {
+        width: min-content;
+        font-size: 2em;
+        color: white;
+        transition-duration: .3s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 15px;
+    }
 
-        .Btn:active {
-        transform: translate(2px ,2px);
-        }
+    .text {
+        position: absolute;
+        right: 0%;
+        width: 0%;
+        opacity: 0;
+        color: white;
+        font-size: 1.2em;
+        font-weight: 500;
+        transition-duration: .3s;
+    }
 
-        .btn{
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 20px;
-            text-align: center;
-            text-decoration: none;
-            background-color: black; 
-            color: #fff;
-            border-radius: 5px;
-            border: 1px solid black;
+    .Btn:hover {
+        width: 125px;
+        border-radius: 0px;
+        transition-duration: .3s;
+    }
 
-        }
-        .btn:hover{
-            background-color: #fff;
-            color: black;
-            border: 1px solid black;
-        }
+    .Btn:hover .sign {
+        transition-duration: .3s;
+    }
+
+    .Btn:hover .text {
+        opacity: 1;
+        width: 70%;
+        transition-duration: .3s;
+    }
+
+    .Btn:active {
+        transform: translate(2px, 2px);
+    }
+
+
 </style>
-
