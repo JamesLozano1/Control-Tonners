@@ -1,0 +1,91 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+{% load static %}
+{% include 'layouts/Barra_Tonners.html' %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/ALL.css' %}">
+    <meta charset="UTF-8">
+    <title>Pendientes por Recibir</title>
+</head>
+
+<body>
+    <h1>Toners Pendientes</h1>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Modelo</th>
+                <th>Cantidad</th>
+                <th>Fecha entrega</th>
+                {% if toner.estado == "RECARGANDO" %}
+                <th>Estado</th>
+                {% else %}
+                <th>Fecha Recibido</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for toner in pendiente %}
+            <tr>
+                <td>{{ toner.toner }}</td>
+                <td>{{ toner.cantidad }}</td>
+                <td>{{ toner.fecha_entrega }}</td>
+                {% if toner.estado == "RECARGANDO" %}
+                <td class="{% if toner.estado == 'RECARGANDO' %}naranja{% endif %}">{{ toner.estado }}</td>
+                <td><a href="#" class="recibir-link" data-toner-id="{{ toner.id }}">Recibir</a></td>
+                {% endif %}
+                {% if toner.estado == "ENTREGADO" %}
+                <th>{{ toner.fecha_recibido }}</th>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
+<style>
+    .naranja {
+        background-color: orange;
+    }
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const recibirLinks = document.querySelectorAll('.recibir-link');
+        recibirLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                const tonerId = this.getAttribute('data-toner-id');
+                recibirToner(tonerId);
+            });
+        });
+    
+        function recibirToner(tonerId) {
+            fetch(`/recibir-toner/${tonerId}/`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Toner recibido exitosamente.');
+                    location.reload();  
+                } else {
+                    alert('Error al procesar la solicitud.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    });
+    </script>
+
+{% endblock %}

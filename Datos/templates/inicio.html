@@ -4,58 +4,105 @@
 
 {% block content %}
 
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <title>Inicio Web</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'CSS/ALL.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Web - Control de Toners</title>
+    <link rel="stylesheet" href="{% static 'CSS/ALL.css' %}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+
+        h3 {
+            color: #555;
+        }
+
+        section {
+            margin-bottom: 30px;
+        }
+
+        h4 {
+            color: #777;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{ title }}</h1>
+        </header>
 
-<center>
-    <br>
-    <h1>
-        {{ title }}
-    </h1>
-    <br>
-    <h3>Bienvenido a la aplicación web de control de toners de la empresa seapto</h3>
-    <br>
-    <p>
+        <section>
+            <h3>Bienvenido a la aplicación web de control de toners de la empresa Seapto</h3>
+            <p>Esta plataforma proporciona herramientas para gestionar el inventario de toners.</p>
+        </section>
 
-    <h3>sección: <span>
-            <h2>Compras</h2>
-        </span></h3>
-    </p>
-    <br>
-    <h4>Hecho por pasante SENA del Area de Analisis y Desarrollo de Sistemas de Información(ADSI) </h4>
-    <br>
-    <h1>Comunicarse Con el Creador</h1>
+        <section>
+            <h3>Sección: <span>Compras</span></h3>
+            <p>Explora nuestras opciones de compra y gestión de toners.</p>
+        </section>
 
-    <h2>Telefono: <a href="3224707277">+57 3224707277</a></h2>
-    
+        <section>
+            <h4>Desarrollado por pasante del SENA en ADSI</h4>
+        </section>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
- 
+        <section>
+            <h1>Contacto del Desarrollador</h1>
+            <h2>Teléfono: <a href="tel:+573224707277">+57 322 470 7277</a></h2>
+            <!-- Asegúrate de utilizar el formato correcto del enlace tel: para móviles -->
+        </section>
+    </div>
+</body>
+</html>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
-</center>
+
 
 {% endblock %}

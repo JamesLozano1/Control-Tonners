@@ -59,6 +59,11 @@ urlpatterns = [
 
     path('guardar-recargas/', views.guardar_recargas, name='guardar_recargas'),
     path('pagina-exitosa/', views.pagina_exitosa, name='pagina_exitosa'),
+    path('buscar_toners_R/', views.buscar_toners_R, name='buscar_toners_R'),
+
+    ## LISTA DE TONERS POR ENTREGAR A SEAPTO
+    path('Lista_T_Pendientes/', views.Lista_T_Pendientes, name='Lista_T_Pendientes'),
+    path('recibir-toner/<int:toner_recargado_id>/', views.recibir_toner, name='recibir_toner'),
 
 ]
 

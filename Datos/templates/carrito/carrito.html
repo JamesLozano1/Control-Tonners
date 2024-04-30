@@ -18,7 +18,7 @@
     {% if productos_en_carrito %}
     <a href="{% url 'Toner_Recarga' %}" class="btn">Volver</a>
 
-    <form method="post" action="{% url 'guardar_recargas' %}">
+    <form id="recargasForm" method="post" action="{% url 'guardar_recargas' %}">
         {% csrf_token %}
         <ul>
             {% for item in productos_en_carrito %}
@@ -27,7 +27,7 @@
                     <tr>
                         <td><img src="{{ item.producto.imagen.url }}" style="width: 90px; height: 95px;"></td>
                         <td>{{ item.producto.nombre }}</td>
-                        <td><input type="number" name="recargas_{{ item.producto.id }}" min="1" max="10" class=""></td>
+                        <td><input  type="number" name="recargas_{{ item.producto.id }}" min="1" max="10" class=""></td>
                         <td>
                             <center>
                                 <a href="{% url 'eliminar_de_lista_recarga' producto_id=item.producto.id %}" class="button">
@@ -64,7 +64,7 @@
             </li>
             {% endfor %}
         </ul>
-        <button type="submit">Guardar Recargas</button>
+        <button type="submit" onclick="validateRecargas()">Guardar Recargas</button>
     </form>
 
     {% else %}
@@ -83,12 +83,26 @@
 </body>
 
 </html>
+<script>
+  function validateRecargas() {
+      var isValid = true;
+      var inputs = document.querySelectorAll('input[type="number"]');
+      
+      inputs.forEach(function(input) {
+          if (input.value === "" || input.value === "0") {
+              isValid = false;
+          }
+      });
+      
+      if (!isValid) {
+          alert("Por favor, ingresa una cantidad válida para todas las recargas.");
+          event.preventDefault();
+      }
+  }
+</script>
 <br>
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-<br>
+
 {% endblock %}

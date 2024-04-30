@@ -1,4 +1,6 @@
 from django.db import models, transaction
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 ## USUARIO ⬇ ---------------------------------------------------------------------------------------------
 class Area(models.Model):
@@ -169,7 +171,16 @@ class Toner_M_Recargados(models.Model):
     toner = models.ForeignKey(Tonner, on_delete=models.SET_NULL, null=True, blank=True)
     cantidad = models.PositiveIntegerField()
     estado = models.CharField(max_length=10, choices=ESTADO, default='RECARGANDO')
+    fecha_entrega = models.DateTimeField(auto_now_add=True, null=False)
+    fecha_recibido = models.DateTimeField(null=True)
 
     def __str__(self) -> str:
         return f"se añade {self.cantidad} a el Toner {self.toner}"
+    
+@receiver(post_save, sender=Toner_M_Recargados)
+def actualizar_estado_toner(sender, instance, created, **kwargs):
+    if instance.estado == 'ENTREGADO':
+        toner = instance.toner
+        toner.cantidad += instance.cantidad
+        toner.save()
 ##AÑADIR LOS TONER QUE ESTABAN EN RECARGANDO

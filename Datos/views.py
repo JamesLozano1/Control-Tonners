@@ -1,11 +1,14 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
 from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners, Tabla_T_Toners_Municipios, Toner_M_Recargados
 from .forms import FormArea, FormPersona, FormTonner, FormsRetiroTonner,FormsTabla_Toners, FormsTabla_Toners_Municipios
 import base64
 from django.core.files.base import ContentFile
 from collections import Counter
 from django.db.models import Sum
+from django.utils import timezone
+from datetime import datetime
+
 
 
 def Inicio(request):
@@ -270,22 +273,24 @@ def Toner_Recarga(request):
         'toner':Toner,
     })
 
+def buscar_toners_R(request):
+    query = request.GET.get('q')
+    toner = Tonner.objects.filter(nombre__icontains=query) if query else []
+    return render(request, 'carrito/Toner_Recargar.html', {'toner': toner})
+
 def add_Lista_de_Recarga(request, producto_id):
     producto = get_object_or_404(Tonner, pk=producto_id)
 
-    # Obtiene los productos almacenados en la cookie del carrito
     carrito = request.COOKIES.get('carrito')
     if carrito:
-        carrito = carrito.split(',')  # Convierte la cadena en una lista
+        carrito = carrito.split(',') 
     else:
         carrito = []
 
-    # Agrega el producto actual al carrito
     carrito.append(str(producto_id))
 
-    # Crea una respuesta de redirección y establece la cookie del carrito
     response = redirect('detalles_toner', producto_id=producto_id)
-    response.set_cookie('carrito', ','.join(carrito))  # Convierte la lista en una cadena separada por comas
+    response.set_cookie('carrito', ','.join(carrito)) 
 
     return response
 
@@ -314,10 +319,10 @@ def ver_carrito(request):
     productos = Tonner.objects.all()
 
     if carrito:
-        carrito = carrito.split(',')  # Convertir la cadena en una lista
-        carrito_count = Counter(carrito)  # Contar la cantidad de cada producto en el carrito
-        producto_ids = carrito_count.keys()  # Obtener los IDs de los productos en el carrito
-        productos = Tonner.objects.filter(id__in=producto_ids)  # Obtener los objetos Tonner correspondientes a los IDs
+        carrito = carrito.split(',')  
+        carrito_count = Counter(carrito)  
+        producto_ids = carrito_count.keys() 
+        productos = Tonner.objects.filter(id__in=producto_ids)  
 
         for producto in productos:
             cantidad = carrito_count[str(producto.id)]  # Obtener la cantidad del producto en el carrito
@@ -331,15 +336,12 @@ def ver_carrito(request):
 ## LO COMPLICADO ⬆
 
 def detalles_T_OFP(request):
-    # Obtener una lista de marcas y tipos de toner únicos
     marcas = Tabla_T_Toners.objects.values_list('marca', flat=True).distinct()
     tipos_toner = Tabla_T_Toners.objects.values_list('toner_de_impresora', flat=True).distinct()
 
-    # Crear un diccionario para almacenar la cantidad total de impresoras por marca y tipo de toner
     impresoras_por_marca_toner = {}
     total_general = 0
 
-    # Calcular la cantidad total de impresoras para cada combinación de marca y tipo de toner
     for marca in marcas:
         impresoras_por_marca_toner[marca] = {}
         for toner in tipos_toner:
@@ -389,10 +391,35 @@ def guardar_recargas(request):
                 toner_id = key.split('_')[1]
                 cantidad_recarga = int(request.POST[key])
                 toner = Tonner.objects.get(id=toner_id)
-                Toner_M_Recargados.objects.create(toner=toner, cantidad=cantidad_recarga)
-        return redirect('pagina_exitosa')
+                
+                recarga = Toner_M_Recargados.objects.create(
+                    toner=toner,
+                    cantidad=cantidad_recarga,
+                    estado='RECARGANDO',
+                    fecha_entrega=timezone.now()
+                )
         
+        response = redirect('pagina_exitosa')
+        response.delete_cookie('carrito')  
+        return response
+
     return redirect('Toner_Recarga')
 
 def pagina_exitosa(request):
     return render(request, 'exito/pagina_exitosa.html')
+
+def Lista_T_Pendientes(request):
+    pendiente = Toner_M_Recargados.objects.all()
+    return render(request, 'carrito/pendientes.html', {
+        'pendiente':pendiente,
+    })
+
+def recibir_toner(request, toner_recargado_id):
+    if request.method == 'POST':
+        toner_recargado = get_object_or_404(Toner_M_Recargados, pk=toner_recargado_id)
+        toner_recargado.estado = 'ENTREGADO'
+        toner_recargado.fecha_recibido = datetime.now()
+        toner_recargado.save()
+        return JsonResponse({'message': 'Recibido exitosamente.'})
+    else:
+        return JsonResponse({'error': 'Método no permitido.'}, status=405)

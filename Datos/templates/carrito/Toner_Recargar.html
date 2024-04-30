@@ -4,7 +4,27 @@
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'CSS/ALL.css' %}">
 <title>Toners Disponibles</title>
+<style>
+.btnCar {
+    display: inline-block;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
 
+.btnCar:hover {
+    background-color: #0056b3;
+}
+
+.cartIcon {
+    vertical-align: middle;
+    margin-right: 10px;
+    filter: brightness(0) invert(1); 
+}
+</style>
 <center>
     {% include 'layouts/Barra_Tonners.html' %}
     <br>
@@ -13,16 +33,22 @@
 
 </center>
 <div style="display: flex; justify-content:space-around;">
-    <form method="GET" action="{% url 'buscar_Toners' %}">
+    <a href="{% url 'Lista_T_Pendientes' %}" class="Pendiente">Pendientes</a>
+
+    <form method="GET" action="{% url 'buscar_toners_R' %}">
         <div class="input-group">
             <input required="" type="text" name="q" autocomplete="off" class="input">
             <label class="user-label">Buscar Toner</label>
         </div>
     </form>
 
-    <a href="{% url 'L_Tonner' %}" class="btn">Todo</a>
+    <a href="{% url 'Toner_Recarga' %}" class="btn">Todo</a>
 
-    <a href="{% url 'ver_carrito' %}" class="btn">Ver Lista</a>
+    <a href="{% url 'ver_carrito' %}" class="btnCar">
+        <center>
+            <img class="cartIcon" width="30" height="30" src="https://img.icons8.com/ios-glyphs/30/shopping-cart--v1.png" alt="shopping-cart--v1"/>
+        </center>
+    </a>
 
 </div>
 <br>
@@ -107,6 +133,5 @@
         height: 50px;
         width: 300px;
     }
-
 </style>
 {% endblock %}
