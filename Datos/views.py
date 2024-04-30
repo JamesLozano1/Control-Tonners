@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners, Tabla_T_Toners_Municipios
+from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners, Tabla_T_Toners_Municipios, Toner_M_Recargados
 from .forms import FormArea, FormPersona, FormTonner, FormsRetiroTonner,FormsTabla_Toners, FormsTabla_Toners_Municipios
 import base64
 from django.core.files.base import ContentFile
@@ -381,3 +381,18 @@ def detalles_toner(request, producto_id):
     return render(request, 'detalles/detalles_toner.html', {
         'producto':producto,
     })
+
+def guardar_recargas(request):
+    if request.method == 'POST':
+        for key in request.POST:
+            if key.startswith('recargas_'):
+                toner_id = key.split('_')[1]
+                cantidad_recarga = int(request.POST[key])
+                toner = Tonner.objects.get(id=toner_id)
+                Toner_M_Recargados.objects.create(toner=toner, cantidad=cantidad_recarga)
+        return redirect('pagina_exitosa')
+        
+    return redirect('Toner_Recarga')
+
+def pagina_exitosa(request):
+    return render(request, 'exito/pagina_exitosa.html')

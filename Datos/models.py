@@ -160,3 +160,16 @@ class Tabla_T_Toners_Municipios(models.Model):
 
 ## TABLA TONER MUNICIPIOS ⬆ ---------------------------------------------------------------------------------------------
 
+##AÑADIR LOS TONER QUE ESTABAN EN RECARGANDO
+class Toner_M_Recargados(models.Model):
+    ESTADO = [
+        ('ENTREGADO','ENTREGADO'),
+        ('RECARGANDO','RECARGANDO'),
+        ]
+    toner = models.ForeignKey(Tonner, on_delete=models.SET_NULL, null=True, blank=True)
+    cantidad = models.PositiveIntegerField()
+    estado = models.CharField(max_length=10, choices=ESTADO, default='RECARGANDO')
+
+    def __str__(self) -> str:
+        return f"se añade {self.cantidad} a el Toner {self.toner}"
+##AÑADIR LOS TONER QUE ESTABAN EN RECARGANDO

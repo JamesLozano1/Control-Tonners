@@ -58,8 +58,8 @@ td {
 }
 
 .button {
-    width: 50px;
-    height: 50px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background-color: rgb(20, 20, 20);
     border: none;
@@ -117,7 +117,7 @@ td {
     perspective: 780px;
 }
 
-.text {
+.textLoader {
     font-size: 20px;
     font-weight: 800;
     color: #0e694d;

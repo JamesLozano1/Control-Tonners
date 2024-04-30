@@ -57,6 +57,9 @@ urlpatterns = [
     path('Toner_Recarga/', views.Toner_Recarga, name='Toner_Recarga'),
     path('detalles_toner/<int:producto_id>/', views.detalles_toner, name='detalles_toner'),
 
+    path('guardar-recargas/', views.guardar_recargas, name='guardar_recargas'),
+    path('pagina-exitosa/', views.pagina_exitosa, name='pagina_exitosa'),
+
 ]
 
 
