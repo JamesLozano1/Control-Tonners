@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import HttpResponse,JsonResponse
+from django.http import HttpResponse,JsonResponse, Http404
 from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners, Tabla_T_Toners_Municipios, Toner_M_Recargados
 from .forms import FormArea, FormPersona, FormTonner, FormsRetiroTonner,FormsTabla_Toners, FormsTabla_Toners_Municipios
 import base64
@@ -8,6 +8,10 @@ from collections import Counter
 from django.db.models import Sum
 from django.utils import timezone
 from datetime import datetime
+from django.http import FileResponse
+from django.conf import settings
+import os
+
 
 
 
@@ -423,3 +427,16 @@ def recibir_toner(request, toner_recargado_id):
         return JsonResponse({'message': 'Recibido exitosamente.'})
     else:
         return JsonResponse({'error': 'Método no permitido.'}, status=405)
+
+
+def download_pdf(request):
+    # Ruta al archivo PDF dentro del directorio de estáticos
+    pdf_file_path = os.path.join(settings.STATIC_ROOT, 'tonner', 'ManualdeUsuario.pdf')
+
+    if os.path.exists(pdf_file_path):
+        with open(pdf_file_path, 'rb') as pdf_file:
+            response = HttpResponse(pdf_file.read(), content_type='application/pdf')
+            response['Content-Disposition'] = 'attachment; filename="ManualdeUsuario.pdf"'
+            return response
+    else:
+        raise Http404("El archivo PDF no se encontró")

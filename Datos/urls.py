@@ -65,6 +65,8 @@ urlpatterns = [
     path('Lista_T_Pendientes/', views.Lista_T_Pendientes, name='Lista_T_Pendientes'),
     path('recibir-toner/<int:toner_recargado_id>/', views.recibir_toner, name='recibir_toner'),
 
+    ## DESCARGAR PDF DE MANUAL DE USUARIO
+    path('download-pdf/', views.download_pdf, name='download_pdf'),
 ]
 
 

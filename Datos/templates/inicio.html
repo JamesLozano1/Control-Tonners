@@ -6,6 +6,7 @@
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -58,8 +59,10 @@
         a:hover {
             text-decoration: underline;
         }
+
     </style>
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -83,10 +86,16 @@
         <section>
             <h1>Contacto del Desarrollador</h1>
             <h2>Teléfono: <a href="tel:+573224707277">+57 322 470 7277</a></h2>
-            <!-- Asegúrate de utilizar el formato correcto del enlace tel: para móviles -->
+        </section>
+        <section>
+            <center>
+                <H1>Manual de usuario</H1>
+                <a href="{% url 'download_pdf' %}" class="btn">Descargar PDF</a>
+            </center>
         </section>
     </div>
 </body>
+
 </html>
 <br>
 <br>
