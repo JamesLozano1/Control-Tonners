@@ -398,7 +398,7 @@ def guardar_recargas(request):
                     estado='RECARGANDO',
                     fecha_entrega=timezone.now()
                 )
-        
+
         response = redirect('pagina_exitosa')
         response.delete_cookie('carrito')  
         return response

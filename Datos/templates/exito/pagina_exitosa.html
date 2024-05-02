@@ -55,8 +55,14 @@
     <div class="success-message">
         <h1>¡Acción completada con éxito!</h1>
         <p>Tu solicitud se ha procesado correctamente.</p>
-        <p>Puedes volver a la <a href="{% url 'Toner_Recarga' %}" class="button">página de inicio</a>.</p>
+        <p>Puedes volver a la <a href="{% url 'Toner_Recarga' %}" class="btn">página de inicio</a>.</p>
     </div>
 </body>
 
 </html>
+
+<script>
+    setTimeout(function() {
+        window.location.href = "{% url 'Toner_Recarga' %}";
+    }, 2000);
+</script>

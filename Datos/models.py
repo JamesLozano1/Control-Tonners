@@ -1,6 +1,7 @@
 from django.db import models, transaction
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.exceptions import ValidationError
 
 ## USUARIO ⬇ ---------------------------------------------------------------------------------------------
 class Area(models.Model):
@@ -9,6 +10,9 @@ class Area(models.Model):
     def __str__(self) -> str:
         return self.nombre
 
+    def clean(self):
+        if Area.objects.filter(nombre=self.nombre).exists():
+            raise ValidationError('Ya existe un área con este nombre.')
 
 class Persona(models.Model):
     nombre = models.CharField(max_length=100)
@@ -17,6 +21,10 @@ class Persona(models.Model):
 
     def __str__( self ):
         return self.nombre
+
+    def clean(self):
+        if Persona.objects.filter(nombre=self.nombre, area=self.area).exists():
+            raise ValidationError('Ya existe una persona con este nombre en esta área.')
 ## USUARIO ⬆ ---------------------------------------------------------------------------------------------
 
 ## TONER ⬇ ---------------------------------------------------------------------------------------------
