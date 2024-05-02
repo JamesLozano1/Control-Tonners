@@ -329,7 +329,7 @@ def ver_carrito(request):
         productos = Tonner.objects.filter(id__in=producto_ids)  
 
         for producto in productos:
-            cantidad = carrito_count[str(producto.id)]  # Obtener la cantidad del producto en el carrito
+            cantidad = carrito_count[str(producto.id)]  
             productos_en_carrito.append({'producto': producto, 'cantidad': cantidad})
 
     return render(request, 'carrito/carrito.html', {'productos_en_carrito': productos_en_carrito, 'productos':productos })
@@ -430,7 +430,6 @@ def recibir_toner(request, toner_recargado_id):
 
 
 def download_pdf(request):
-    # Ruta al archivo PDF dentro del directorio de estáticos
     pdf_file_path = os.path.join(settings.STATIC_ROOT, 'tonner', 'ManualdeUsuario.pdf')
 
     if os.path.exists(pdf_file_path):
