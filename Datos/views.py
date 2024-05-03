@@ -147,12 +147,10 @@ def Tabla_D_Toners(request):
 
 
 def V_Toners_R(request):
-    producto = Retiro_Tonner.objects.all()
+    producto = Retiro_Tonner.objects.all().order_by('-fecha_retiro')
 
-    return render(request, 'vista/T_Ocupado.html', {
-        'producto':producto,
-    })
-
+    return render(request, 'vista/T_Ocupado.html', {'producto': producto})
+    
 def Tabla_D_Toners_Municipios(request):
 
     if request.method == 'POST':
