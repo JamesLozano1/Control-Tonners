@@ -411,7 +411,7 @@ def pagina_exitosa(request):
     return render(request, 'exito/pagina_exitosa.html')
 
 def Lista_T_Pendientes(request):
-    pendiente = Toner_M_Recargados.objects.all()
+    pendiente = Toner_M_Recargados.objects.all().order_by('-fecha_entrega')
     return render(request, 'carrito/pendientes.html', {
         'pendiente':pendiente,
     })
