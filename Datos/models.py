@@ -38,7 +38,7 @@ class Tonner(models.Model):
 
     nombre = models.CharField(max_length=50)
     cantidad = models.PositiveBigIntegerField()
-    Numero_Tonner = models.CharField(max_length=20)
+    Numero_Toner = models.CharField(max_length=20)
     Estado = models.CharField(max_length=10, choices=ESTADO_T, default='L')
     imagen = models.ImageField()
     
