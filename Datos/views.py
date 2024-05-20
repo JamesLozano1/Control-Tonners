@@ -437,3 +437,4 @@ def download_pdf(request):
             return response
     else:
         raise Http404("El archivo PDF no se encontró")
+    

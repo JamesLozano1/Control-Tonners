@@ -37,7 +37,7 @@ class FormTonner(forms.ModelForm):
 class FormsRetiroTonner(forms.ModelForm):
     class Meta: 
         model = Retiro_Tonner
-        fields = ['r_persona', 'cantidad_retirada']
+        fields = ['r_persona', 'cantidad_retirada', 'caso_GLPI']
 
 class FormsTabla_Toners(forms.ModelForm):
     class Meta:
