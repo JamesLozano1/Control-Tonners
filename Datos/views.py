@@ -217,10 +217,8 @@ def Editar_Persona(request, producto_id):
 def buscar_Persona(request):
     query = request.GET.get('q', '')  
 
-    personas = Persona.objects.filter(nombre__icontains=query)  
-    areas = Area.objects.filter(nombre__icontains=query)
+    producto = Persona.objects.filter(nombre__icontains=query)  
 
-    producto = list(personas) + list(areas)
 
     return render(request, 'vista/lista_personas.html', {'producto': producto})
 
