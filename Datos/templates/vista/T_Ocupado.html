@@ -30,6 +30,7 @@
                 <th>Persona</th>
                 <th>Cantidad Retirada</th>
                 <th>Fecha de Retiro</th>
+                <th>Caso GLPI</th>
                 <th>ver</th>
             </tr>
         </thead>
@@ -41,6 +42,15 @@
                 <td>{{ item.r_persona }}</td>
                 <td>{{ item.cantidad_retirada }}</td>
                 <td>{{ item.fecha_retiro }}</td>
+                {% if item.caso_GLPI == '0' %}
+                    <td style="color: red;">
+                        No
+                    </td>
+                {% else %}
+                    <td>
+                        Si
+                    </td>
+                {% endif %}
                 <td>
                     <a href="{% url 'detalle_retiro_toner' item.pk %}" class="btn">Ver Detalles</a>
                 </td>
