@@ -13,6 +13,10 @@ class Area(models.Model):
     def clean(self):
         if Area.objects.filter(nombre=self.nombre).exists():
             raise ValidationError('Ya existe un área con este nombre.')
+    
+    def save(self, *args, **kwargs):
+        self.nombre = self.nombre.upper()   
+        super(Area, self).save(*args, **kwargs)
 
 class Persona(models.Model):
     nombre = models.CharField(max_length=100)
@@ -25,6 +29,10 @@ class Persona(models.Model):
     def clean(self):
         if Persona.objects.filter(nombre=self.nombre, area=self.area).exists():
             raise ValidationError('Ya existe una persona con este nombre en esta área.')
+
+    def save(self, *args, **kwargs):
+        self.nombre = self.nombre.upper()   
+        super(Persona, self).save(*args, **kwargs)
 ## USUARIO ⬆ ---------------------------------------------------------------------------------------------
 
 ## TONER ⬇ ---------------------------------------------------------------------------------------------
@@ -47,6 +55,10 @@ class Tonner(models.Model):
 
     def is_libre(self):
         return self.Estado == 'Disponible'
+    
+    def save(self, *args, **kwargs):
+        self.nombre = self.nombre.upper()   
+        super(Tonner, self).save(*args, **kwargs)
 
 
 
@@ -115,6 +127,15 @@ class Tabla_T_Toners(models.Model):
     def __str__(self) -> str:
         return f"{self.oficina} {self.marca}"
     
+    def clean(self):
+        if Tabla_T_Toners.objects.filter(oficina=self.oficina, activo=self.activo).exists():
+            raise ValidationError('Ya existe se encuentra registrada')
+        
+    def save(self, *args, **kwargs):
+        self.oficina = self.oficina.upper()   
+        super(Tabla_T_Toners, self).save(*args, **kwargs)
+
+    
 ## TABLA TONER OFICINA PRINCIPAL IBAGUE ⬆ ---------------------------------------------------------------------------------------------
 
 
@@ -164,6 +185,14 @@ class Tabla_T_Toners_Municipios(models.Model):
 
     def __str__(self) -> str:
         return f"{self.oficina} - {self.marca}"
+    
+    def clean(self):
+        if Tabla_T_Toners_Municipios.objects.filter(oficina=self.oficina, activo=self.activo).exists():
+            raise ValidationError('Ya existe se encuentra registrada')
+        
+    def save(self, *args, **kwargs):
+        self.oficina = self.oficina.upper()   
+        super(Tabla_T_Toners_Municipios, self).save(*args, **kwargs)
 
 ## TABLA TONER MUNICIPIOS ⬆ ---------------------------------------------------------------------------------------------
 
