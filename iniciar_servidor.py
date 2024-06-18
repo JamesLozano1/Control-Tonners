@@ -17,7 +17,7 @@ def iniciar_servidor():
         print("Iniciando el servidor Django...")
         subprocess.Popen('python manage.py runserver', shell=True)
         
-        time.sleep(5)
+        time.sleep(10)
         
         print("Abriendo el navegador web...")
         webbrowser.open('http://127.0.0.1:8000')
