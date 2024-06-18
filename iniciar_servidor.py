@@ -8,7 +8,8 @@ def iniciar_servidor():
     
     try:
         os.chdir(ruta_directorio)
-        
+        navegador_abierto = False  # Bandera para controlar si el navegador ya se abrió
+
         while True:
             print("Actualizando el repositorio Git...")
             try:
@@ -23,8 +24,11 @@ def iniciar_servidor():
             
             time.sleep(10)
             
-            print("Abriendo el navegador web...")
-            webbrowser.open('http://127.0.0.1:8000')
+            # Abrir el navegador solo si no se ha abierto antes
+            if not navegador_abierto:
+                print("Abriendo el navegador web...")
+                webbrowser.open('http://127.0.0.1:8000')
+                navegador_abierto = True
             
             # Esperar un tiempo antes de la próxima actualización
             tiempo_espera = 60 * 5  # 5 minutos
@@ -51,6 +55,3 @@ def iniciar_servidor():
 
 if __name__ == "__main__":
     iniciar_servidor()
-
-## comando para crear arranque de aplicación 
-## pyinstaller --onefile Nombre_Archivo_Python.py
