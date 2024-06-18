@@ -55,3 +55,6 @@ def iniciar_servidor():
 
 if __name__ == "__main__":
     iniciar_servidor()
+
+## comando para crear arranque de aplicación
+## pyinstaller --onefile Nombre_Archivo_Python.py
