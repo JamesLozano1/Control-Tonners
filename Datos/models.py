@@ -39,7 +39,7 @@ class Persona(models.Model):
 class Tonner(models.Model):
     ESTADO_T = [
         ('Disponible', 'Disponible'),
-      
+    
     ]
 
 
@@ -67,7 +67,7 @@ class Retiro_Tonner(models.Model):
     r_persona = models.ForeignKey(Persona, on_delete=models.SET_NULL, null=True, blank=True)
     cantidad_disponible = models.PositiveIntegerField(default=1)  
     cantidad_retirada = models.PositiveIntegerField(default=1)
-    caso_GLPI = models.CharField(max_length=100, default='N/A')
+    caso_GLPI = models.CharField(max_length=100, default='En Espera')
     fecha_retiro = models.DateTimeField(auto_now_add=True)
 
 

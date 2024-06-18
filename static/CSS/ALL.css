@@ -205,11 +205,26 @@ td {
     background-color: #fff;
     color: #14427d;
     border: 1px solid #14427d;
+
+}
+
+.btnActive {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    text-align: center;
+    text-decoration: none;
+    background-color: #ffffff;
+    color: #14427d;
+    border-radius: 5px;
+    border: 1px solid #14427d;
 }
 
 /* Boton Universal */
 
 /* Boton de pendientes */
+
+
 .Pendiente {
     display: inline-block;
     padding: 10px 20px;
@@ -227,4 +242,18 @@ td {
     color: #14427d;
     border: 1px solid #ff9100;
 }
+
 /* Boton de pendientes */
+
+.styled-link {
+    text-decoration: none;
+    color: #045cab;
+    padding: 10px;
+    border: 1px solid #045cab;
+    border-radius: 5px;
+}
+
+  .styled-link:hover {
+    background-color: #045cab;
+    color: white;
+  }

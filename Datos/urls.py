@@ -47,8 +47,8 @@ urlpatterns = [
 
     ## RETIRO DE TONNERS
     path('retirar_Tonner/<int:producto_id>/', views.RetiroTonner, name='retiroTonner'),
-    path('V_Toners_R/', views.V_Toners_R, name='V_Toners_R'),
     path('toners-retirados/<int:producto_id>/', views.detalle_retiro_toner, name='detalle_retiro_toner'),
+    path('V_Toners_R/', views.Buscar_Retiro, name='buscar_retiro'),
 
     ## Reacargar
     path('add_lista_de_recarga/<int:producto_id>/', views.add_Lista_de_Recarga, name='add_lista_de_recarga'),
@@ -67,6 +67,11 @@ urlpatterns = [
 
     ## DESCARGAR PDF DE MANUAL DE USUARIO
     path('download-pdf/', views.download_pdf, name='download_pdf'),
+
+    ##Area
+    path('Lista_Areas/', views.Lista_Areas, name='Lista_Areas'),
+    path('Buscar_Area/', views.Buscar_Area, name='Buscar_Area'),
+    path('Editar_Area/<int:producto_id>/', views.Editar_Area, name='Editar_Area'),
 ]
 
 

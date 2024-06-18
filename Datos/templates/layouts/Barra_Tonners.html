@@ -4,10 +4,15 @@
 
 
 <div style="display: flex; justify-content: space-evenly;">
-    <a href="{% url 'Toner_Recarga' %}" class="btn">Recargando</a>
-    <a href="{% url 'V_Toners_R' %}" class="btn">En uso</a>
-    <a href="{% url 'L_Tonner' %}" class="btn">Disponible</a>
+    <a href="{% url 'Toner_Recarga' %}" class="{% if request.path == '/Toner_Recarga/' %} btnActive {% elif request.path == '/Lista_T_Pendientes/' %} btnActive {% elif request.path == '/buscar_toners_R/' %} btnActive {% else %} btn {% endif %}">Recargando</a>
+    <a href="{% url 'buscar_retiro' %}" class="{% if request.path == '/V_Toners_R/' %} btnActive {% else %} btn {% endif %}">En uso</a>
+    <a href="{% url 'L_Tonner' %}" class="{% if request.path == '/L_Tonner/' %} btnActive {% elif request.path == '/buscar_Toners/' %} btnActive {% else %} btn {% endif %}">Disponible</a>
     {% if request.path == '/L_Tonner/' %}
+    <a class="Btn" href="{% url 'R_Tonner' %}" style="margin-top: 1rem;">
+        <div class="sign">+</div>
+        <div class="text">Crear</div>
+    </a>
+    {% elif request.path == '/buscar_Toners/' %}
     <a class="Btn" href="{% url 'R_Tonner' %}" style="margin-top: 1rem;">
         <div class="sign">+</div>
         <div class="text">Crear</div>
@@ -15,6 +20,7 @@
     {% endif %}
 
 </div>
+<br>
 
 <style>
     * {

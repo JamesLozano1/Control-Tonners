@@ -6,39 +6,25 @@
 <title>Registro Toner</title>
 
 <style>
+    /* Estilos generales */
     .form-container {
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
-    }
-
-    label {
-        display: block; 
-        margin-bottom: 8px; 
-    }
-
-    select {
-        width: 100%; 
-        padding: 10px; 
-        border: 1px solid #ccc; 
-        border-radius: 5px; 
-        box-sizing: border-box; 
-        font-size: 16px; 
-        
-    }
-
-    option {
-        padding: 10px;   
     }
 
     form {
-        width: 50vh;
+        width: 400px; 
         padding: 20px;
         border: 1px solid #ccc;
         background-color: #f9f9f9;
         border-radius: 8px;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    form h2 {
+        text-align: center;
+        margin-bottom: 20px; 
     }
 
     form label {
@@ -47,13 +33,15 @@
     }
 
     form input[type="text"],
-    form input[type="number"] {
+    form input[type="number"],
+    form select {
         width: 100%;
         padding: 10px;
         margin-bottom: 15px;
         border: 1px solid #ccc;
         border-radius: 5px;
         box-sizing: border-box;
+        font-size: 16px;
     }
 
     form button {
@@ -69,47 +57,43 @@
     form button:hover {
         background-color: #0056b3;
     }
+
     .navbar {
-            background-color: #fbe82c;
-        }
+        background-color: #fbe82c;
+        overflow: hidden; 
+    }
 
-        .navbar a {
-            float: left;
-            display: block;
-            color: #124d71;
-            text-align: center;
-            padding: 20px 30px;
-            text-decoration: none;
-        }
-        .navbar .a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 20px 24px;
-            text-decoration: none;
-        }
+    .navbar a {
+        float: left;
+        display: block;
+        color: #124d71;
+        text-align: center;
+        padding: 20px 30px;
+        text-decoration: none;
+    }
 
-        .navbar a:hover {
-            background-color: #045cab;
-            color: white;
-        } 
+    .navbar a:hover {
+        background-color: #045cab;
+        color: white;
+    }
 
+    .navbar .active a {
+        background-color: #045cab;
+        color: white;
+    }
 
-        .navbar .active a {
-            color: white;
-            background-color: #045cab; 
-            width: max-content;
-        }
+    .navbar .a {
+        float: left;
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 20px 24px;
+        text-decoration: none;
+    }
 
-        .navbar .active.green {
-            color: white;
-            background-color: #045cab; ; 
-        }
-
-        ul {
-            list-style: none;
-        }
+    ul {
+        list-style: none;
+    }
 </style>
 
 <div class="form-container">

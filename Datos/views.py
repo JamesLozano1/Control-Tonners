@@ -11,7 +11,8 @@ from datetime import datetime
 from django.http import FileResponse
 from django.conf import settings
 import os
-
+from django.db.models import Q
+from django.urls import resolve
 
 
 
@@ -146,8 +147,6 @@ def Tabla_D_Toners(request):
     })
 
 
-def V_Toners_R(request):
-    producto = Retiro_Tonner.objects.all().order_by('-fecha_retiro')
 
     return render(request, 'vista/T_Ocupado.html', {'producto': producto})
     
@@ -212,7 +211,7 @@ def Editar_Persona(request, producto_id):
             form.save()
     else:
         form = FormPersona(instance=producto)
-    return render(request, 'Edit/editar_persona.html', {'form': form})
+    return render(request, 'Edit/editar_persona.html', {'form': form,})
 
 def buscar_Persona(request):
     query = request.GET.get('q', '')  
@@ -436,3 +435,44 @@ def download_pdf(request):
     else:
         raise Http404("El archivo PDF no se encontró")
     
+
+def Buscar_Retiro(request):
+    query = request.GET.get('q', '')
+
+    retiradas = Retiro_Tonner.objects.all().order_by('-fecha_retiro')
+
+    if query:
+        retiradas = retiradas.filter(
+            Q(r_persona__area__nombre__icontains=query) |
+            Q(r_tonner__nombre__icontains=query)
+        )
+
+    # Ordenar por fecha de retiro por defecto
+
+    return render(request, 'vista/T_Ocupado.html', {'retiradas': retiradas, 'query': query})
+
+def Lista_Areas(request):
+    item = Area.objects.all()
+    return render(request, 'vista/lista_Areas.html', {
+        'item':item,
+    })
+
+def Buscar_Area(request):
+    query = request.GET.get('q', '')
+    item = Area.objects.filter(nombre__icontains=query) if query else []
+    
+    return render(request, 'vista/lista_Areas.html', {
+        'item':item,
+    })
+
+def Editar_Area(request, producto_id):
+    producto = get_object_or_404(Area, id=producto_id)
+
+    if request.method == 'POST':
+        form = FormArea(request.POST, instance=producto)
+        if form.is_valid():
+            form.save()
+    else:
+        form = FormArea(instance=producto)
+    return render(request, 'Edit/editar_Area.html', {'form': form,})
+

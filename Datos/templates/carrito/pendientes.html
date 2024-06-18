@@ -36,7 +36,20 @@
                 <td>{{ toner.cantidad }}</td>
                 <td>{{ toner.fecha_entrega }}</td>
                 {% if toner.estado == "RECARGANDO" %}
-                <td class="{% if toner.estado == 'RECARGANDO' %}naranja{% endif %}">{{ toner.estado }}</td>
+                <td class="{% if toner.estado == 'RECARGANDO' %}naranja{% endif %}">
+                    <div style="display: flex;justify-content: space-evenly; color: #ffffff; align-items: center;">
+                        <br>
+                        <h2>
+                                {{ toner.estado }}
+                        </h2>
+                        <div class="loading-wave">
+                            <div class="loading-bar" style="background-color: #fbe82c;"></div>
+                            <div class="loading-bar" style= "background-color: #0056b3;"></div>
+                            <div class="loading-bar" style="background-color: red;"></div>
+                            <div class="loading-bar" style="background-color: #76b72a;"></div>
+                        </div>                      
+                    </div>
+                </td>
                 <td><a href="#" class="recibir-link btn" data-toner-id="{{ toner.id }}">Recibir</a></td>
                 {% endif %}
                 {% if toner.estado == "ENTREGADO" %}
@@ -53,6 +66,49 @@
     .naranja {
         background-color: orange;
     }
+
+    .loading-wave {
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    }
+
+    .loading-bar {
+    width: 20px;
+    height: 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+    animation: loading-wave-animation 1s ease-in-out infinite;
+    }
+
+    .loading-bar:nth-child(2) {
+    animation-delay: 0.1s;
+    }
+
+    .loading-bar:nth-child(3) {
+    animation-delay: 0.2s;
+    }
+
+    .loading-bar:nth-child(4) {
+    animation-delay: 0.3s;
+    }
+
+    @keyframes loading-wave-animation {
+        0% {
+            height: 10px;
+        }
+
+        50% {
+            height: 50px;
+        }
+
+        100% {
+            height: 10px;
+        }
+    }
+
 </style>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
