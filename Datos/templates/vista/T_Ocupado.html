@@ -139,7 +139,7 @@
                     {% elif item.caso_GLPI == 'En Espera' %}
                         <span style="color: red;">No</span>
                     {% else %}
-                        Si
+                        {{ item.caso_GLPI }}
                     {% endif %}
                 </td>
                 <td>

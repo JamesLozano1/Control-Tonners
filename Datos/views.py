@@ -444,10 +444,10 @@ def Buscar_Retiro(request):
     if query:
         retiradas = retiradas.filter(
             Q(r_persona__area__nombre__icontains=query) |
-            Q(r_tonner__nombre__icontains=query)
+            Q(r_tonner__nombre__icontains=query) |
+            Q(caso_GLPI__icontains=query)
         )
 
-    # Ordenar por fecha de retiro por defecto
 
     return render(request, 'vista/T_Ocupado.html', {'retiradas': retiradas, 'query': query})
 
