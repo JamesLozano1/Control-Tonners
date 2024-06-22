@@ -68,6 +68,7 @@ class Retiro_Tonner(models.Model):
     cantidad_disponible = models.PositiveIntegerField(default=1)  
     cantidad_retirada = models.PositiveIntegerField(default=1)
     caso_GLPI = models.CharField(max_length=100, default='En Espera')
+    descripcion = models.TextField(max_length=500, default='Sin descripción')
     fecha_retiro = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
