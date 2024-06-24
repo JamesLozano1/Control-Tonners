@@ -13,6 +13,7 @@ from django.conf import settings
 import os
 from django.db.models import Q
 from django.urls import resolve
+import openpyxl
 
 
 
@@ -476,3 +477,40 @@ def Editar_Area(request, producto_id):
         form = FormArea(instance=producto)
     return render(request, 'Edit/editar_Area.html', {'form': form,})
 
+def generar_reporte_excel(request):
+    # Crear un nuevo libro de Excel y seleccionar la hoja activa
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = "Reporte de Retiros de Tonner"
+
+    # Definir los encabezados
+    headers = [
+        'ID', 'Tonner', 'Persona', 'Cantidad Disponible', 
+        'Cantidad Retirada', 'Caso GLPI', 'Descripción', 'Fecha de Retiro'
+    ]
+    ws.append(headers)
+
+    # Obtener todos los registros de Retiro_Tonner
+    retiros = Retiro_Tonner.objects.all()
+
+    # Agregar los datos de cada retiro a la hoja de Excel
+    for retiro in retiros:
+        ws.append([
+            retiro.id,
+            str(retiro.r_tonner),
+            str(retiro.r_persona),
+            retiro.cantidad_disponible,
+            retiro.cantidad_retirada,
+            retiro.caso_GLPI,
+            retiro.descripcion,
+            retiro.fecha_retiro.strftime('%Y-%m-%d %H:%M:%S')
+        ])
+
+    # Configurar la respuesta HTTP para descargar el archivo Excel
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = 'attachment; filename=reporte_retiros_tonner.xlsx'
+    
+    # Guardar el archivo Excel en la respuesta
+    wb.save(response)
+
+    return response

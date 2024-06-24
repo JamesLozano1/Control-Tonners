@@ -72,6 +72,9 @@ urlpatterns = [
     path('Lista_Areas/', views.Lista_Areas, name='Lista_Areas'),
     path('Buscar_Area/', views.Buscar_Area, name='Buscar_Area'),
     path('Editar_Area/<int:producto_id>/', views.Editar_Area, name='Editar_Area'),
+
+    ## Reportes
+    path('reporte/excel/', views.generar_reporte_excel, name='generar_reporte_excel'),
 ]
 
 
