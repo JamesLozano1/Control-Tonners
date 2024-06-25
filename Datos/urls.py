@@ -75,6 +75,10 @@ urlpatterns = [
 
     ## Reportes
     path('reporte/excel/', views.generar_reporte_excel, name='generar_reporte_excel'),
+
+    ## Cerrar servidor
+
+    path('cerrar-servidor/', views.cerrar_servidor, name='cerrar_servidor'),
 ]
 
 

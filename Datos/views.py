@@ -14,6 +14,10 @@ import os
 from django.db.models import Q
 from django.urls import resolve
 import openpyxl
+import signal
+import psutil
+from psutil import AccessDenied
+
 
 
 
@@ -508,3 +512,7 @@ def generar_reporte_excel(request):
     wb.save(response)
 
     return response
+
+def cerrar_servidor(request):
+    os.kill(os.getpid(), signal.SIGTERM)
+    return HttpResponse("Servidor cerrado.")

@@ -5,6 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Tonners</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="csrf-token" content="{{ csrf_token }}">
 </head>
 
 <body>
@@ -13,17 +16,21 @@
             <li>
                 <img src="{% static 'logo.png' %}" alt="Logo" style="width: 250px;" onclick="inicio()">
             </li>
-            <li
-                class="{% if request.path == '/R_Persona/' %}active{% elif request.path == '/R_Area/'%} active {% elif request.path == '/Lista/the/personas/' %} active {% elif request.path == '/buscar_Persona/' %} active {% elif request.path == '/Lista_Areas/' %} active {% elif request.path == '/Buscar_Area/' %} active {% endif %}">
-                <a href="{% url 'R_Area' %}">Usuario </a>
+            <li class="{% if request.path == '/R_Persona/' %}active{% elif request.path == '/R_Area/'%} active {% elif request.path == '/Lista/the/personas/' %} active {% elif request.path == '/buscar_Persona/' %} active {% elif request.path == '/Lista_Areas/' %} active {% elif request.path == '/Buscar_Area/' %} active {% endif %}">
+                <a href="{% url 'R_Area' %}">Usuario</a>
             </li>
-            <li
-                class="{% if request.path == '/Ver_Tabla_OFP/' %}active{% elif request.path == '/Ver_Tabla_Municipios/' %}active{% elif request.path == '/buscar_T_OFP/' %}active{% elif request.path == '/buscar_Tabla_T_Toners_Municipios/' %}active {% elif request.path == '/Tabla_Impresoras_OFC/' %} active {% elif request.path == '/detalles_T_OFP/' %} active {% elif request.path == '/detalles_T_Municipios/' %} active {% elif request.path == '/Tabla/Impresoras/Municipios/' %} active {% endif %}">
-                <a href="{% url 'Ver_Tabla' %} ">Impresoras </a>
+            <li class="{% if request.path == '/Ver_Tabla_OFP/' %}active{% elif request.path == '/Ver_Tabla_Municipios/' %}active{% elif request.path == '/buscar_T_OFP/' %}active{% elif request.path == '/buscar_Tabla_T_Toners_Municipios/' %}active {% elif request.path == '/Tabla_Impresoras_OFC/' %} active {% elif request.path == '/detalles_T_OFP/' %} active {% elif request.path == '/detalles_T_Municipios/' %} active {% elif request.path == '/Tabla/Impresoras/Municipios/' %} active {% endif %}">
+                <a href="{% url 'Ver_Tabla' %}">Impresoras</a>
             </li>
-            <li
-                class="{% if request.path == '/L_Tonner/' %}active{% elif request.path == '/V_Toners_R/'%} active {% elif request.path == '/E_Tonner/'%} active{% elif request.path == '/R_Tonner/'%} active {% elif request.path == '/buscar_Toners/' %} active {% elif request.path == '/Toner_Recarga/' %} active {% elif request.path == '/ver_carrito/' %} active {% elif request.path == 'Registro Toner Oficina Principal' %} active {% elif request.path == '/buscar_toners_R/' %} active {% elif request.path == '/Lista_T_Pendientes/' %} active {% endif %}">
+            <li class="{% if request.path == '/L_Tonner/' %}active{% elif request.path == '/V_Toners_R/'%} active {% elif request.path == '/E_Tonner/'%} active{% elif request.path == '/R_Tonner/'%} active {% elif request.path == '/buscar_Toners/' %} active {% elif request.path == '/Toner_Recarga/' %} active {% elif request.path == '/ver_carrito/' %} active {% elif request.path == 'Registro Toner Oficina Principal' %} active {% elif request.path == '/buscar_toners_R/' %} active {% elif request.path == '/Lista_T_Pendientes/' %} active {% endif %}">
                 <a href="{% url 'L_Tonner' %}">Toners</a>
+            </li>
+            <li>
+                <button class="buttonClose" onclick="cerrarServidor()">
+                    <span class="X"></span>
+                    <span class="Y"></span>
+                    <div class="close">Cerrar</div>
+                </button>
             </li>
         </ul>
     </nav>
@@ -32,9 +39,7 @@
         {% endblock %}
     </div>
     {% if request.path == '/R_Area/' %}
-
     {% elif request.path == '/R_Persona/' %}
-
     {% else %}
     {% include 'layouts/footer.html' %}
     {% endif %}
@@ -51,8 +56,6 @@
             color: #555;
             margin: 0;
         }
-
-
 
         * {
             padding: 0;
@@ -90,7 +93,6 @@
             color: white;
         }
 
-
         .navbar .active a {
             color: white;
             background-color: #045cab;
@@ -107,71 +109,115 @@
             list-style: none;
         }
 
-        button {
-            font-family: Arial, Helvetica, sans-serif;
-            font-weight: bold;
-            color: white;
-            background-color: #171717;
-            padding: 1em 2em;
+        .buttonClose {
+            position: relative;
+            width: 2.5em;
+            height: 2.5em;
             border: none;
-            border-radius: .6rem;
-            position: relative;
-            cursor: pointer;
-            overflow: hidden;
-            border: 1px solid black;
-
+            background: rgba(180, 83, 107, 0.11);
+            border-radius: 5px;
+            transition: background 0.5s;
         }
 
-        button span:not(:nth-child(6)) {
+        .X {
+            content: "";
             position: absolute;
-            left: 50%;
             top: 50%;
-            transform: translate(-50%, -50%);
-            height: 30px;
-            width: 30px;
-            background-color: #0c66ed;
-            border-radius: 50%;
-            transition: .6s ease;
+            left: 50%;
+            width: 2em;
+            height: 1.5px;
+            background-color: rgb(255, 255, 255);
+            transform: translateX(-50%) rotate(45deg);
         }
 
-        button span:nth-child(6) {
-            position: relative;
+        .Y {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 2em;
+            height: 1.5px;
+            background-color: #fff;
+            transform: translateX(-50%) rotate(-45deg);
         }
 
-        button span:nth-child(1) {
-            transform: translate(-3.3em, -4em);
+        .close {
+            position: absolute;
+            display: flex;
+            padding: 0.8rem 1.5rem;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(-50%);
+            top: 110%;
+            left: 50%;
+            width: 3em;
+            height: 1.7em;
+            font-size: 12px;
+            background-color: rgb(19, 22, 24);
+            color: rgb(187, 229, 236);
+            border: none;
+            border-radius: 3px;
+            pointer-events: none;
+            opacity: 0;
         }
 
-        button span:nth-child(2) {
-            transform: translate(-6em, 1.3em);
+        .buttonClose:hover {
+            background-color: rgb(211, 21, 21);
         }
 
-        button span:nth-child(3) {
-            transform: translate(-.2em, 1.8em);
+        .buttonClose:active {
+            background-color: rgb(130, 0, 0);
         }
 
-        button span:nth-child(4) {
-            transform: translate(3.5em, 1.4em);
+        .buttonClose:hover>.close {
+            animation: close 0.2s forwards 0.25s;
         }
 
-        button span:nth-child(5) {
-            transform: translate(3.5em, -3.8em);
+        @keyframes close {
+            100% {
+                opacity: 1;
+            }
         }
-
-        button:hover span:not(:nth-child(6)) {
-            transform: translate(-50%, -50%) scale(4);
-            transition: 1.5s ease;
-        }
-
-        
     </style>
 </body>
 
 </html>
 
 <script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    const csrftoken = getCookie('csrftoken');
+
+    function cerrarServidor() {
+        $.ajax({
+            url: "{% url 'cerrar_servidor' %}",
+            method: "POST",
+            beforeSend: function(xhr, settings) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            },
+            success: function(response) {
+                alert("Servidor cerrado.");
+            },
+            error: function(error) {
+                alert("¡Se cerro el servidor.!")
+            }
+        });
+    }
+
     function inicio() {
         window.location.href = "{% url 'Inicio' %}";
     }
-
 </script>
