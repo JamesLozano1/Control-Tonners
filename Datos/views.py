@@ -412,11 +412,6 @@ def guardar_recargas(request):
 def pagina_exitosa(request):
     return render(request, 'exito/pagina_exitosa.html')
 
-def Lista_T_Pendientes(request):
-    pendiente = Toner_M_Recargados.objects.all().order_by('-fecha_entrega')
-    return render(request, 'carrito/pendientes.html', {
-        'pendiente':pendiente,
-    })
 
 def recibir_toner(request, toner_recargado_id):
     if request.method == 'POST':
@@ -516,3 +511,28 @@ def generar_reporte_excel(request):
 def cerrar_servidor(request):
     os.kill(os.getpid(), signal.SIGTERM)
     return HttpResponse("Servidor cerrado.")
+
+def Lista_T_Pendientes(request):
+    pendiente = Toner_M_Recargados.objects.filter(estado='ENTREGADO').order_by('-fecha_entrega')
+    query = request.GET.get('q', '')
+    if query:
+        items = Toner_M_Recargados.objects.filter(toner__nombre__icontains=query, estado='RECARGANDO').order_by('-fecha_entrega')
+    else:
+        items = pendiente  
+
+    combined_items = list(pendiente) + list(set(items) - set(pendiente))
+
+    return render(request, 'carrito/pendientes.html', {
+        'items': combined_items,
+    })
+
+def Buscar_T_Recargando(request):
+    query = request.GET.get('q', '')
+    if query:
+        items = Toner_M_Recargados.objects.filter(toner__nombre__icontains=query, estado='RECARGANDO').order_by('-fecha_entrega')
+    else:
+        items = Toner_M_Recargados.objects.all().order_by('-fecha_entrega')
+    
+    return render(request, 'carrito/pendientes.html', {
+        'items': items,
+    })

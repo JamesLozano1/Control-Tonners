@@ -79,6 +79,10 @@ urlpatterns = [
     ## Cerrar servidor
 
     path('cerrar-servidor/', views.cerrar_servidor, name='cerrar_servidor'),
+
+
+    ## Buscar toner pendientes
+    path('Buscar_T_Recargando/', views.Buscar_T_Recargando, name='Buscar_T_Recargando'),
 ]
 
 
