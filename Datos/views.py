@@ -508,9 +508,15 @@ def generar_reporte_excel(request):
 
     return response
 
+def OFF_SERVER(request):
+    titulo = 'Sin conexión'
+    return render(request, 'OFF_S/OFF_SERVER.html', {
+        'titulo': titulo,
+    })
+
 def cerrar_servidor(request):
     os.kill(os.getpid(), signal.SIGTERM)
-    return HttpResponse("Servidor cerrado.")
+    return HttpResponse('')
 
 def Lista_T_Pendientes(request):
     pendiente = Toner_M_Recargados.objects.filter(estado='ENTREGADO').order_by('-fecha_entrega')

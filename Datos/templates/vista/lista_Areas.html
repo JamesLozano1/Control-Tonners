@@ -109,6 +109,7 @@
         <thead>
             <tr>
                 <th>Nombre</th>
+                <th>Usuarios</th>
                 <th>Editar</th>
             </tr>
         </thead>
@@ -116,6 +117,7 @@
             {% for item in item %}
             <tr>
                 <td>{{ item.nombre }}</td>
+                <td>En proceso de creación</td>
                 <td>
                     <a href="{% url 'Editar_Area' item.id %}" class="btn">Editar</a>
                 </td>

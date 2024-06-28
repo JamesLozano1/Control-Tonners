@@ -26,7 +26,7 @@
                 <a href="{% url 'L_Tonner' %}">Toners</a>
             </li>
             <li>
-                <button class="buttonClose" onclick="cerrarServidor()">
+                <button class="buttonClose" onclick="OFF_SERVER()">
                     <span class="X"></span>
                     <span class="Y"></span>
                     <div class="close">Cerrar</div>
@@ -184,40 +184,11 @@
 </html>
 
 <script>
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
-    const csrftoken = getCookie('csrftoken');
-
-    function cerrarServidor() {
-        $.ajax({
-            url: "{% url 'cerrar_servidor' %}",
-            method: "POST",
-            beforeSend: function(xhr, settings) {
-                xhr.setRequestHeader("X-CSRFToken", csrftoken);
-            },
-            success: function(response) {
-                alert("Servidor cerrado.");
-            },
-            error: function(error) {
-                alert("¡Se cerro el servidor.!")
-            }
-        });
-    }
-
     function inicio() {
         window.location.href = "{% url 'Inicio' %}";
+    }
+
+    function OFF_SERVER() {
+        window.location.href = "{% url 'OFF_SERVER' %}";
     }
 </script>
