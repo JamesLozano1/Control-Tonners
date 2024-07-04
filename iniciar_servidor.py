@@ -44,3 +44,5 @@ if __name__ == "__main__":
 
 # Comando para crear arranque de aplicación
 # pyinstaller --onefile Nombre_Archivo_Python.py
+# pyinstaller iniciar_servidor.spec
+

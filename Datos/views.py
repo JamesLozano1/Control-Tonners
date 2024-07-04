@@ -221,10 +221,13 @@ def Editar_Persona(request, producto_id):
 def buscar_Persona(request):
     query = request.GET.get('q', '')  
 
-    producto = Persona.objects.filter(nombre__icontains=query)  
-
-
-    return render(request, 'vista/lista_personas.html', {'producto': producto})
+    personas = Persona.objects.all()
+    if query:
+        personas = personas.filter(
+            Q(nombre__icontains=query) |
+            Q(area__nombre__icontains=query)
+        )
+    return render(request, 'vista/lista_personas.html', {'producto': personas})
 
 def buscar_T_OFP(request):
     query = request.GET.get('q', '')  
@@ -519,7 +522,7 @@ def cerrar_servidor(request):
     return HttpResponse('')
 
 def Lista_T_Pendientes(request):
-    pendiente = Toner_M_Recargados.objects.filter(estado='ENTREGADO').order_by('-fecha_entrega')
+    pendiente = Toner_M_Recargados.objects.filter(estado='RECARGANDO').order_by('-fecha_entrega')
     query = request.GET.get('q', '')
     if query:
         items = Toner_M_Recargados.objects.filter(toner__nombre__icontains=query, estado='RECARGANDO').order_by('-fecha_entrega')
