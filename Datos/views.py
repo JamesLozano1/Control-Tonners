@@ -296,7 +296,7 @@ def add_Lista_de_Recarga(request, producto_id):
 
     carrito.append(str(producto_id))
 
-    response = redirect('detalles_toner', producto_id=producto_id)
+    response = redirect('/Toner_Recarga', producto_id=producto_id)
     response.set_cookie('carrito', ','.join(carrito)) 
 
     return response
