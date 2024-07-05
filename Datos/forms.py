@@ -1,3 +1,4 @@
+from typing import Any
 from django import forms
 from .models import Area, Persona, Tonner, Retiro_Tonner, Tabla_T_Toners, Tabla_T_Toners_Municipios, Recargar_Toner
 import base64
@@ -37,7 +38,22 @@ class FormTonner(forms.ModelForm):
 class FormsRetiroTonner(forms.ModelForm):
     class Meta: 
         model = Retiro_Tonner
-        fields = ['r_persona', 'cantidad_retirada', 'caso_GLPI', 'descripcion']
+        fields = ['r_persona', 'cantidad_retirada', 'caso_GLPI', 'descripcion', 'firma']
+
+    def save(self, commit=True):
+        retiro = super().save(commit=False)
+        firma = self.cleaned_data.get('firma')
+
+        if firma:
+            format, imgstr = firma.split(';base64,')
+            ext = format.split('/')[-1]
+            retiro.firma.save(f'firma_{retiro.r_persona}.{ext}', ContentFile(base64.b64decode(imgstr)), save=False)
+
+        if commit:
+            retiro.save()
+
+        return retiro
+        
 
 class FormsTabla_Toners(forms.ModelForm):
     class Meta:
