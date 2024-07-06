@@ -65,15 +65,17 @@ class Tonner(models.Model):
 class Retiro_Tonner(models.Model):
     r_tonner = models.ForeignKey(Tonner, on_delete=models.SET_NULL, null=True, blank=True)
     r_persona = models.ForeignKey(Persona, on_delete=models.PROTECT, null=False, blank=False)
+    persona = models.CharField(max_length=100)
     cantidad_disponible = models.PositiveIntegerField(default=1)  
     cantidad_retirada = models.PositiveIntegerField(default=1)
     caso_GLPI = models.CharField(max_length=100, default='En Espera')
     descripcion = models.TextField(max_length=500, default='Sin descripción')
-    firma = models.ImageField(upload_to='firmas/')
+    firma = models.ImageField(upload_to='firmas/', null=True, blank=True)
     fecha_retiro = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.r_persona} - {self.r_tonner}"
+    
 
 
 

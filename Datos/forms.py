@@ -36,16 +36,16 @@ class FormTonner(forms.ModelForm):
         fields = '__all__'
 
 class FormsRetiroTonner(forms.ModelForm):
-    class Meta: 
+    class Meta:
         model = Retiro_Tonner
         fields = ['r_persona', 'cantidad_retirada', 'caso_GLPI', 'descripcion', 'firma']
 
     def save(self, commit=True):
         retiro = super().save(commit=False)
-        firma = self.cleaned_data.get('firma')
+        firma_imagen = self.cleaned_data.get('firma')
 
-        if firma:
-            format, imgstr = firma.split(';base64,')
+        if firma_imagen:
+            format, imgstr = firma_imagen.split(';base64,')
             ext = format.split('/')[-1]
             retiro.firma.save(f'firma_{retiro.r_persona}.{ext}', ContentFile(base64.b64decode(imgstr)), save=False)
 
@@ -53,7 +53,6 @@ class FormsRetiroTonner(forms.ModelForm):
             retiro.save()
 
         return retiro
-        
 
 class FormsTabla_Toners(forms.ModelForm):
     class Meta:

@@ -241,7 +241,7 @@
       <input type="hidden" id="firma_imagen" name="firma_imagen">
       <br>
 
-      <button class="button" onclick="limpiarCanvas()">
+      <button class="button" id="clearCanvas">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 69 14" class="svgIcon bin-top">
           <g clip-path="url(#clip0_35_24)">
             <path fill="black"
@@ -295,42 +295,47 @@
 
 </html>
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-    var firmaInput = document.getElementById('firma_imagen');
-    var drawing = false;
+document.addEventListener("DOMContentLoaded", function() {
+            var canvas = document.getElementById('canvas');
+            var ctx = canvas.getContext('2d');
+            var firmaInput = document.getElementById('firma_imagen');
+            var drawing = false;
 
-    canvas.addEventListener('mousedown', function(e) {
-      drawing = true;
-      ctx.beginPath();
-      ctx.moveTo(e.offsetX, e.offsetY);
-    });
+            canvas.addEventListener('mousedown', function(e) {
+                drawing = true;
+                ctx.beginPath();
+                ctx.moveTo(e.offsetX, e.offsetY);
+            });
 
-    canvas.addEventListener('mousemove', function(e) {
-      if (drawing) {
-        ctx.lineTo(e.offsetX, e.offsetY);
-        ctx.stroke();
-      }
-    });
+            canvas.addEventListener('mousemove', function(e) {
+                if (drawing) {
+                    ctx.lineTo(e.offsetX, e.offsetY);
+                    ctx.stroke();
+                }
+            });
 
-    canvas.addEventListener('mouseup', function() {
-      drawing = false;
-      var dataURL = canvas.toDataURL('image/png');
-      firmaInput.value = dataURL;
-    });
+            canvas.addEventListener('mouseup', function() {
+                drawing = false;
+                var dataURL = canvas.toDataURL('image/png');
+                firmaInput.value = dataURL;
+            });
 
-    canvas.addEventListener('mouseout', function() {
-      drawing = false;
-    });
+            canvas.addEventListener('mouseout', function() {
+                drawing = false;
+            });
 
-    document.getElementById('clearCanvas').addEventListener('click', function() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      firmaInput.value = '';
-    });
-  });
+            document.getElementById('clearCanvas').addEventListener('click', function() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                firmaInput.value = '';
+            });
+        });
+
 </script>
 <style>
+
+  /* #id_firma, label[for="id_firma"] {
+    display: none;
+  } */
     .link-container {
     display: flex;
     justify-content: space-evenly;
