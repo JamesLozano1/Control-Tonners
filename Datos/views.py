@@ -93,7 +93,7 @@ def RetiroTonner(request, producto_id):
     producto = get_object_or_404(Tonner, pk=producto_id)
 
     if request.method == 'POST':
-        form = FormsRetiroTonner(request.POST, request.FILES)
+        form = FormsRetiroTonner(request.POST)
         if form.is_valid():
             cantidad_retirada = form.cleaned_data['cantidad_retirada']
             if cantidad_retirada <= producto.cantidad:
@@ -103,13 +103,6 @@ def RetiroTonner(request, producto_id):
                 retiro = form.save(commit=False)
                 retiro.r_tonner = producto
                 retiro.cantidad_disponible = producto.cantidad
-
-                firma_data = request.POST.get('firma')
-                if firma_data:
-                    format, imgstr = firma_data.split(';base64,')
-                    ext = format.split('/')[-1]
-                    retiro.firma.save(f'firma_{retiro.r_persona}.{ext}', ContentFile(base64.b64decode(imgstr)), save=False)
-
                 retiro.save()
 
                 return render(request, 'vista/retiro_success.html', {'producto': producto, 'retiro': retiro})
@@ -119,6 +112,7 @@ def RetiroTonner(request, producto_id):
         form = FormsRetiroTonner()
 
     return render(request, 'vista/Retirar_Tonner.html', {'form': form, 'producto': producto})
+
 
 def E_Recarga(request):
     r_tonner = Tonner.objects.filter(Estado='Recargando')
