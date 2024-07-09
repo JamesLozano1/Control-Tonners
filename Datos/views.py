@@ -91,6 +91,7 @@ def Editar_Tonner(request, producto_id):
 
 def RetiroTonner(request, producto_id):
     producto = get_object_or_404(Tonner, pk=producto_id)
+    usuarios = Persona.objects.all()  # Consulta para obtener todos los usuarios
 
     if request.method == 'POST':
         form = FormsRetiroTonner(request.POST)
@@ -111,7 +112,7 @@ def RetiroTonner(request, producto_id):
     else:
         form = FormsRetiroTonner()
 
-    return render(request, 'vista/Retirar_Tonner.html', {'form': form, 'producto': producto})
+    return render(request, 'vista/Retirar_Tonner.html', {'form': form, 'producto': producto, 'usuarios': usuarios})
 
 
 def E_Recarga(request):

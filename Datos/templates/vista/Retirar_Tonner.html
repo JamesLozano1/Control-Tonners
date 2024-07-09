@@ -4,124 +4,20 @@
 <html lang="es">
 
 <head>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+  <!-- Incluir jQuery (necesario para Select2) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Incluir JS de Select2 -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Retirar Toner</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      box-sizing: border-box;
-    }
 
-    h1 {
-      color: #21a4d8;
-      text-align: center;
-    }
-
-    form {
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin: 20px;
-      width: 90%;
-      max-width: 600px;
-      box-sizing: border-box;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 8px;
-    }
-
-    input[type="text"],
-    input[type="number"] {
-      width: 100%;
-      padding: 8px;
-      margin-bottom: 16px;
-      box-sizing: border-box;
-    }
-
-    input[type="submit"] {
-      background-color: #198a1e;
-      color: #fff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    input[type="submit"]:hover {
-      background-color: #155917;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 10px 20px;
-      margin-top: 20px;
-      text-align: center;
-      text-decoration: none;
-      background-color: #21a4d8;
-      color: #fff;
-      border-radius: 5px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .btn:hover {
-      background-color: #0056b3;
-    }
-
-    .btn2 {
-      display: inline-block;
-      padding: 10px 20px;
-      margin-top: 20px;
-      text-align: center;
-      text-decoration: none;
-      background-color: #d82d21;
-      color: #fff;
-      border-radius: 5px;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .btn2:hover {
-      background-color: #86392f;
-    }
-
-    .product-info {
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    .product-info img {
-      max-width: 100%;
-      max-height: 200px;
-    }
-
-    .product-edit {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 0 auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      background-color: #f9f9f9;
-      width: 100%;
-      max-width: 600px;
-      box-sizing: border-box;
-    }
-
+/* css de botones  */
     button {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
         "Liberation Mono", "Courier New", monospace;
@@ -256,6 +152,78 @@
         margin: 0 10px;
       }
     }
+/* css de botones  */
+
+/* CSS DEL FORMULARIO */
+body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 20px;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #0056b3;
+    }
+    img {
+      display: block;
+      margin: 0 auto;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+    label {
+      font-weight: bold;
+    }
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+    input[type="submit"] {
+      background-color: #0056b3;
+      color: white;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 18px;
+    }
+    input[type="submit"]:hover {
+      background-color: #004181;
+    }
+    hr {
+      border: 0;
+      border-top: 1px solid #ccc;
+      margin: 20px 0;
+    }
+    p {
+      margin-bottom: 15px;
+    }
+    .select2 {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+/* CSS DEL FORMULARIO */
+
   </style>
 </head>
 
@@ -264,32 +232,62 @@
 
   <form method="post" class="" style="text-align: start; font-size: 28px;">
     <center>
-      <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="120px" style="border-radius: 10px;">
+      <img src="/tonner/83A.jpeg" alt="TONER 83A" width="120px" style="border-radius: 10px;">
     </center>
-    <p>Nombre Producto: <span style="color: #0056b3;">{{ producto.nombre }}</span></p>
+    <p>Nombre Producto: <span style="color: #0056b3;">TONER 83A</span></p>
     <hr>
     {% csrf_token %}
-    {{ form.as_p }}
 
-    <center>
-      <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
-        <button type="submit">
-          <span class="transition"></span>
-          <span class="gradient"></span>
-          <span class="label">Entregar</span>
-        </button>
+    <p>
+      <label for="id_r_persona">R persona:</label>
+      <select name="r_persona" required="" id="id_r_persona" class="select2">
+        <option value="" selected="">---------</option>
+        {% for usuario in usuarios %}
+          <option value="{{ usuario.id }}">{{ usuario.nombre }}</option> <!-- Ajusta según tu modelo -->
+        {% endfor %}
+      </select>
+    </p>
+    <p>
+      <label for="id_cantidad_retirada">Cantidad retirada:</label>
+      <input type="number" name="cantidad_retirada" value="1" min="0" required="" id="id_cantidad_retirada">
+    </p>
+    <p>
+      <label for="id_caso_GLPI">Caso GLPI:</label>
+      <input type="text" name="caso_GLPI" value="En Espera" maxlength="100" required="" id="id_caso_GLPI">
+    </p>
+    <p>
+      <label for="id_descripcion">Descripcion:</label>
+      <textarea name="descripcion" cols="40" rows="10" maxlength="500" required="" id="id_descripcion">Sin descripción</textarea>
+    </p>
 
-        <button class="button2" type="submit">
-          <a href="{% url 'L_Tonner' %}" style="text-decoration: none; color: white;">
-            <span class="transition2"></span>
-            <span class="gradient2"></span>
-            <span class="label2">Volver</span>
-          </a>
-        </button>
-      </div>
-    </center>
   </form>
+  <br>
+  <center>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
+      <button type="submit">
+        <span class="transition"></span>
+        <span class="gradient"></span>
+        <span class="label">Entregar</span>
+      </button>
+
+      <button class="button2" type="submit">
+        <a href="{% url 'L_Tonner' %}" style="text-decoration: none; color: white;">
+          <span class="transition2"></span>
+          <span class="gradient2"></span>
+          <span class="label2">Volver</span>
+        </a>
+      </button>
+    </div>
+  </center>
 </body>
 
 </html>
+
+<script>
+  $(document).ready(function() {
+    $('.select2').select2({
+      placeholder: "Selecciona un responsable"
+    });
+  });
+</script>
 {% endblock %}

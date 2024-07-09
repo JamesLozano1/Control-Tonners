@@ -190,7 +190,7 @@ class Tabla_T_Toners_Municipios(models.Model):
         return f"{self.oficina} - {self.marca}"
     
     def clean(self):
-        if Tabla_T_Toners_Municipios.objects.filter(oficina=self.oficina, activo=self.activo).exists():
+        if Tabla_T_Toners_Municipios.objects.filter(oficina=self.oficina, activo=self.activo).exclude(pk=self.pk).exists():
             raise ValidationError('Ya existe se encuentra registrada')
         
     def save(self, *args, **kwargs):
