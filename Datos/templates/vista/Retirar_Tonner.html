@@ -232,14 +232,14 @@ body {
 
   <form method="post" class="" style="text-align: start; font-size: 28px;">
     <center>
-      <img src="/tonner/83A.jpeg" alt="TONER 83A" width="120px" style="border-radius: 10px;">
+      <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" width="120px" style="border-radius: 10px;">
     </center>
-    <p>Nombre Producto: <span style="color: #0056b3;">TONER 83A</span></p>
+    <p>Nombre Producto: <span style="color: #0056b3;">{{ producto.nombre }}</span></p>
     <hr>
     {% csrf_token %}
 
     <p>
-      <label for="id_r_persona">R persona:</label>
+      <label for="id_r_persona">Persona que Retira:</label>
       <select name="r_persona" required="" id="id_r_persona" class="select2">
         <option value="" selected="">---------</option>
         {% for usuario in usuarios %}
