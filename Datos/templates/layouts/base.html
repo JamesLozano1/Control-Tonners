@@ -12,7 +12,7 @@
 
 <body>
     <nav class="navbar">
-        <ul style="display: flex; justify-content: space-evenly;">
+        <ul style="display: flex; justify-content: space-evenly; align-items: center;">
             <li>
                 <img src="{% static 'logo.png' %}" alt="Logo" style="width: 250px;" onclick="inicio()">
             </li>
@@ -25,7 +25,9 @@
             <li class="{% if request.path == '/L_Tonner/' %}active{% elif request.path == '/V_Toners_R/'%} active {% elif request.path == '/E_Tonner/'%} active{% elif request.path == '/R_Tonner/'%} active {% elif request.path == '/buscar_Toners/' %} active {% elif request.path == '/Toner_Recarga/' %} active {% elif request.path == '/ver_carrito/' %} active {% elif request.path == 'Registro Toner Oficina Principal' %} active {% elif request.path == '/buscar_toners_R/' %} active {% elif request.path == '/Lista_T_Pendientes/' %} active {% endif %}">
                 <a href="{% url 'L_Tonner' %}">Toners</a>
             </li>
-            <li>
+            
+            
+            <li style="display: flex; align-items: center;">
                 <button class="buttonClose" onclick="OFF_SERVER()">
                     <span class="X"></span>
                     <span class="Y"></span>
