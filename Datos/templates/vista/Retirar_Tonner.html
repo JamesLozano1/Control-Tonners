@@ -260,25 +260,26 @@ body {
       <textarea name="descripcion" cols="40" rows="10" maxlength="500" required="" id="id_descripcion">Sin descripción</textarea>
     </p>
 
+    <center>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
+        <button type="submit">
+          <span class="transition"></span>
+          <span class="gradient"></span>
+          <span class="label">Entregar</span>
+        </button>
+        
+        <button class="button2" type="submit">
+          <a href="{% url 'L_Tonner' %}" style="text-decoration: none; color: white;">
+            <span class="transition2"></span>
+            <span class="gradient2"></span>
+            <span class="label2">Volver</span>
+          </a>
+        </button>
+      </div>
+    </center>
+
   </form>
   <br>
-  <center>
-    <div style="display: flex; flex-wrap: wrap; justify-content: space-evenly;">
-      <button type="submit">
-        <span class="transition"></span>
-        <span class="gradient"></span>
-        <span class="label">Entregar</span>
-      </button>
-
-      <button class="button2" type="submit">
-        <a href="{% url 'L_Tonner' %}" style="text-decoration: none; color: white;">
-          <span class="transition2"></span>
-          <span class="gradient2"></span>
-          <span class="label2">Volver</span>
-        </a>
-      </button>
-    </div>
-  </center>
 </body>
 
 </html>
