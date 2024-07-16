@@ -11,7 +11,7 @@ class Area(models.Model):
         return self.nombre
 
     def clean(self):
-        if Area.objects.filter(nombre=self.nombre).exists():
+        if Area.objects.filter(nombre=self.nombre).exclude(pk=self.pk).exists():
             raise ValidationError('Ya existe un área con este nombre.')
     
     def save(self, *args, **kwargs):
@@ -27,7 +27,7 @@ class Persona(models.Model):
         return self.nombre
 
     def clean(self):
-        if Persona.objects.filter(nombre=self.nombre, area=self.area).exists():
+        if Persona.objects.filter(nombre=self.nombre, area=self.area).exclude(pk=self.pk).exists():
             raise ValidationError('Ya existe una persona con este nombre en esta área.')
 
     def save(self, *args, **kwargs):
@@ -131,7 +131,7 @@ class Tabla_T_Toners(models.Model):
         return f"{self.oficina} {self.marca}"
     
     def clean(self):
-        if Tabla_T_Toners.objects.filter(oficina=self.oficina, activo=self.activo).exists():
+        if Tabla_T_Toners.objects.filter(oficina=self.oficina, activo=self.activo).exclude(pk=self.pk).exists():
             raise ValidationError('Ya existe se encuentra registrada')
         
     def save(self, *args, **kwargs):

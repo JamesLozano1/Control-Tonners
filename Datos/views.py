@@ -486,7 +486,7 @@ def generar_reporte_excel(request):
     ws.title = "Reporte de Retiros de Tonner"
 
     headers = [
-        'ID', 'Tonner', 'Persona', 'Cantidad Disponible', 
+        'Tonner', 'Persona', 
         'Cantidad Retirada', 'Caso GLPI', 'Descripción', 'Fecha de Retiro'
     ]
     ws.append(headers)
@@ -495,10 +495,8 @@ def generar_reporte_excel(request):
 
     for retiro in retiros:
         ws.append([
-            retiro.id,
             str(retiro.r_tonner),
             str(retiro.r_persona),
-            retiro.cantidad_disponible,
             retiro.cantidad_retirada,
             retiro.caso_GLPI,
             retiro.descripcion,
