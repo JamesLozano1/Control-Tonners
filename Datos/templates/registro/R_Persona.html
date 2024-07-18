@@ -6,6 +6,13 @@
 {% include 'layouts/Barra_user.html' %}
 
 <head>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+  <!-- Incluir jQuery (necesario para Select2) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Incluir JS de Select2 -->
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   <title>Registro de Persona</title>
   <link rel="stylesheet" type="text/css" href="{% static 'CSS/ALL.css' %}">
 </head>
@@ -24,7 +31,21 @@
 
   <form method="post" enctype="multipart/form-data" style="max-width: 600px; margin: 0 auto;">
     {% csrf_token %}
-    {{ form.as_p }}
+    <p>
+      <label for="id_nombre">Nombre:</label>
+      <input type="text" name="nombre" maxlength="100" required="" id="id_nombre">
+    </p>
+
+    <p>
+      <label for="id_area">Area:</label>
+      <select name="area" id="id_area" class="select2">
+        <option value="" selected="">---------</option>
+        {% for area in areas %}
+          <option value="{{ area.id }}"> {{ area.nombre }} </option>
+        {% endfor %}
+  
+      </select>      
+    </p>
 
     <br>
     <hr>
@@ -71,6 +92,33 @@
 </div>
 
 <style>
+  /* SELECTOR DE AREA */
+  .form-group {
+            margin: 20px 0;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .select2-container .select2-selection--single {
+            height: 38px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            line-height: 38px;
+        }
+        .select2-container--default .select2-selection--single .select2-selection__arrow {
+            height: 38px;
+        }
+  /* SELECTOR DE AREA */
+  
   .link-container {
     display: flex;
     justify-content: space-evenly;
@@ -235,6 +283,12 @@
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     document.getElementById('firma_imagen').value = '';
   }
+
+  $(document).ready(function() {
+    $('.select2').select2({
+      placeholder: "Selecciona un responsable"
+    });
+  });
 </script>
 
 

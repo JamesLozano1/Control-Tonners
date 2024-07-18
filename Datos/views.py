@@ -42,6 +42,7 @@ def Area_U(request):
     })
 
 def Persona_U(request):
+    areas = Area.objects.all()
     if request.method == 'POST':
         form = FormPersona(request.POST, request.FILES)  
         if form.is_valid():  
@@ -57,6 +58,7 @@ def Persona_U(request):
         form = FormPersona()  
 
     return render(request, 'registro/R_Persona.html', {
+        'areas':areas,
         'form': form,
     })
 
@@ -152,10 +154,9 @@ def Tabla_D_Toners(request):
         'form': form,
     })
 
-
-
     return render(request, 'vista/T_Ocupado.html', {'producto': producto})
     
+
 def Tabla_D_Toners_Municipios(request):
 
     if request.method == 'POST':

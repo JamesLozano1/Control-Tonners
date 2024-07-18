@@ -243,7 +243,7 @@ body {
       <select name="r_persona" required="" id="id_r_persona" class="select2">
         <option value="" selected="">---------</option>
         {% for usuario in usuarios %}
-          <option value="{{ usuario.id }}">{{ usuario.nombre }}</option> <!-- Ajusta según tu modelo -->
+          <option value="{{ usuario.id }}">{{ usuario.area }} - {{ usuario.nombre }}</option> <!-- Ajusta según tu modelo -->
         {% endfor %}
       </select>
     </p>
