@@ -175,6 +175,13 @@ class Tabla_T_Toners_Municipios(models.Model):
         ('NO','NO'),
         ('REGISTRAR','REGISTRAR'),
     ]
+    
+    ZONA = [
+        ('SIN DEFINIR', 'SIN DEFINIR'),
+        ('SUR', 'SUR'),
+        ('NORTE', 'NORTE'),
+        ('ALEDAÑOS', 'ALEDAÑOS'),
+    ]
 
     oficina = models.CharField(max_length=50)
     activo = models.CharField(max_length=30)
@@ -185,6 +192,7 @@ class Tabla_T_Toners_Municipios(models.Model):
     otro_toner = models.CharField(max_length=9, choices=T_TONER, default='N/A')
     cantidad_toner = models.PositiveBigIntegerField()
     comprobado = models.CharField(max_length=9, choices=Y_N, default='SI')
+    zona = models.CharField(max_length=11, choices=ZONA, default='SIN DEFINIR')
 
     def __str__(self) -> str:
         return f"{self.oficina} - {self.marca}"

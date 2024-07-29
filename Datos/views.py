@@ -257,6 +257,7 @@ def editar_t_municipios(request, producto_id):
         form = FormsTabla_Toners_Municipios(request.POST, instance=producto)
         if form.is_valid():
             form.save()
+        return redirect('Ver_Tabla_Municipios')
     else:
         form = FormsTabla_Toners_Municipios(instance=producto)
     return render(request, 'Edit/Editar_T_Municipios.html', {'form': form,})
@@ -522,10 +523,10 @@ def cerrar_servidor(request):
     return HttpResponse('')
 
 def Lista_T_Pendientes(request):
-    pendiente = Toner_M_Recargados.objects.filter(estado='RECARGANDO').order_by('-fecha_entrega')
+    pendiente = Toner_M_Recargados.objects.order_by('-fecha_entrega')
     query = request.GET.get('q', '')
     if query:
-        items = Toner_M_Recargados.objects.filter(toner__nombre__icontains=query, estado='RECARGANDO').order_by('-fecha_entrega')
+        items = Toner_M_Recargados.objects.filter(toner__nombre__icontains=query).order_by('-fecha_entrega')
     else:
         items = pendiente  
 

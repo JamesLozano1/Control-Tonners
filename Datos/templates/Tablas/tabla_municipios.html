@@ -227,6 +227,7 @@
                 <th>OTRO TONER</th>
                 <th>CANTIDAD OTROS</th>
                 <th>COMPROBADO</th>
+                <th>ZONA</th>
                 <th>EDITAR</th>
             </tr>
         </thead>
@@ -265,6 +266,8 @@
 
                 {% endif %}
                 {% endif %}
+                <td>{{ item.zona }}</td>
+
                 <td>
                     <a href="{% url 'editar_t_municipios' item.id %}">
                         <img width="20" height="20" src="https://img.icons8.com/ios/50/pencil--v1.png"
