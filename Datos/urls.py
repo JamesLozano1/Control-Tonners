@@ -84,7 +84,7 @@ urlpatterns = [
     ## Buscar toner pendientes
     path('Buscar_T_Recargando/', views.Buscar_T_Recargando, name='Buscar_T_Recargando'),
 
-    ## OFF_SERVER
+    ## OFF_SERVER.
 
     path('OFF_SERVER/', views.OFF_SERVER, name='OFF_SERVER'),
 ]
