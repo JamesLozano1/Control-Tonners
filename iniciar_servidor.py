@@ -4,7 +4,7 @@ import webbrowser
 import time
 
 def iniciar_servidor():
-    ruta_directorio = r'C:\Users\COMPRAS\Desktop\Control-Tonners'
+    ruta_directorio = r'c:\Users\COMPRAS\Documents\Control-Tonners'
     
     try:
         os.chdir(ruta_directorio)
